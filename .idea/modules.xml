@@ -3,11 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Organizeme.iml" filepath="$PROJECT_DIR$/Organizeme.iml" />
-      <module fileurl="file://C:\Organizeme\Organizeme\Organizeme.iml" filepath="C:\Organizeme\Organizeme\Organizeme.iml" />
-      <module fileurl="file://H:\Organizeme\Organizeme\Organizeme.iml" filepath="H:\Organizeme\Organizeme\Organizeme.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Organizeme\Organizeme\app\app.iml" filepath="C:\Organizeme\Organizeme\app\app.iml" />
-      <module fileurl="file://H:\Organizeme\Organizeme\app\app.iml" filepath="H:\Organizeme\Organizeme\app\app.iml" />
     </modules>
   </component>
 </project>
