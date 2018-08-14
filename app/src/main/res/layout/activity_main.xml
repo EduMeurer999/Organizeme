@@ -11,43 +11,60 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="198dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         app:srcCompat="@mipmap/ic_launcher" />
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="29dp"
-        android:text="E-mail" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textEmailAddress" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:text="E-mail" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="29dp"
-        android:text="Senha" />
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress" />
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:text="Senha" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login" />
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword" />
 
-    <TextView
-        android:id="@+id/txtCadastro"
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Não é cadastrado?"
-        android:textAlignment="center"
-        android:textColor="@android:color/holo_blue_bright" />
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtCadastro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Não é cadastrado?"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_blue_bright" />
+    </LinearLayout>
+
 </LinearLayout>
