@@ -27,7 +27,7 @@ public class Database extends SQLiteOpenHelper {
         try {
             db.execSQL(SQL);
         }catch (SQLException e) {
-            Toast.makeText(CONTEXT, "Erro ao criar Tabela", Toast.LENGTH_LONG).show();
+            Toast.makeText(CONTEXT, "Erro de script sql "+e, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -35,4 +35,6 @@ public class Database extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+
+
 }

@@ -19,6 +19,7 @@ public class CadastroActivity extends AppCompatActivity {
         EditText edtSenhaC = (EditText) findViewById(R.id.edtSenhaC);
         String nome = edtNome.getText().toString();
         String Email = edtEmail.getText().toString();
+        Database db = new Database(getBaseContext(), "Usuarios.db", "create table if not exists usuarios ('id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR)'");
 
     }
 }
