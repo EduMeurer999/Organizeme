@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class Database extends SQLiteOpenHelper {
     public static String NOME_BANCO;
     public static String SQL;
+    public static String [] Dados = new String[10];
     public static Context CONTEXT;
     public Database(Context context, String nomeBanco, String sql){
         super(context, nomeBanco, null, 1);
