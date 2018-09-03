@@ -1,10 +1,10 @@
-package com.example.a20151inf0182.organizeme;
+package com.example.a20151inf0182.organizeme.Activity;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
 
+import com.example.a20151inf0182.organizeme.R;
 
 
 public class CadastroActivity extends AppCompatActivity {
