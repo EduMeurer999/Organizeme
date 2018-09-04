@@ -7,7 +7,7 @@ package com.example.a20151inf0182.organizeme.Entidades;
 public class Usuarios {
 
     private String id;
-    private String emial;
+    private String email;
     private String senha;
     private String nome;
 
@@ -22,12 +22,12 @@ public class Usuarios {
         this.id = id;
     }
 
-    public String getEmial() {
-        return emial;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmial(String emial) {
-        this.emial = emial;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getSenha() {

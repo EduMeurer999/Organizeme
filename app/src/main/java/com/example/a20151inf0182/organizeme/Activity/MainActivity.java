@@ -38,10 +38,10 @@ public class MainActivity extends AppCompatActivity {
         btnLogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!edtEmail.getText().toString().equals("") && (!edtSenha.getText().toString().equals(""))){
+                if(!edtEmail.getText().toString().equals("") && !edtSenha.getText().toString().equals("")){
                     usuarios = new Usuarios();
-                    usuarios.setEmial(edtEmail.getText().toString());
-                    usuarios.setEmial(edtSenha.getText().toString());
+                    usuarios.setEmail(edtEmail.getText().toString());
+                    usuarios.setSenha(edtSenha.getText().toString());
                     validarLogin();
                 }else{
                     Toast.makeText(MainActivity.this, "Preencha os campos", Toast.LENGTH_SHORT).show();
@@ -63,13 +63,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void validarLogin(){
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-        autenticacao.signInWithEmailAndPassword(usuarios.getEmial(), usuarios.getSenha()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        autenticacao.signInWithEmailAndPassword(usuarios.getEmail(), usuarios.getSenha()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    abrirTelaPrincipal();
-                    Toast.makeText(MainActivity.this, "Login efetuado com sucesso", Toast.LENGTH_SHORT).show();
-                }
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        abrirTelaPrincipal();
+                        Toast.makeText(MainActivity.this, "Login efetuado com sucesso", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(MainActivity.this, "Login não efetuado com sucesso", Toast.LENGTH_SHORT).show();
+                    }
             }
         });
     }
