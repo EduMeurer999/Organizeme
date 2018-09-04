@@ -4,22 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.a20151inf0182.organizeme.Activity.CadastroActivity"
-    android:orientation="vertical"
-    android:padding="20dp">
+    tools:context="com.example.a20151inf0182.organizeme.CadastroActivity"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/txtCadastre"
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
-        android:layout_height="86dp"
+        android:layout_height="79dp"
         android:gravity="center"
-        android:text="Cadastre-se" />
+        android:text="Cadastre-se"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/txtNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nome Completo" />
+        android:text="Nome" />
 
     <EditText
         android:id="@+id/edtNome"
@@ -55,21 +56,22 @@
         android:inputType="textPassword" />
 
     <TextView
-        android:id="@+id/txtSenhaC"
+        android:id="@+id/txtConfirmaSenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Confirmar Senha" />
 
     <EditText
-        android:id="@+id/edtSenhaC"
+        android:id="@+id/edtConfirmaSenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/btnCadastrarUser"
+        android:id="@+id/btnCadastrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cadastrar" />
+
 </LinearLayout>
