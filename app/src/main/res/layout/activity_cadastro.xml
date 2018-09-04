@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.a20151inf0182.organizeme.CadastroActivity"
-    android:padding="20dp"
+    tools:context="com.example.a20151inf0182.organizeme.Activity.CadastroActivity"
     android:orientation="vertical">
 
     <TextView

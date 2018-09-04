@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:padding="20dp"
-    tools:context="com.example.a20151inf0182.organizeme.MainActivity">
+    tools:context="com.example.a20151inf0182.organizeme.Activity.MainActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -63,7 +62,7 @@
             android:id="@+id/txtCadastro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Não é cadastrado?"
+            android:text="Não é cadastrado? Clique aqui"
             android:textAlignment="center"
             android:textColor="@android:color/holo_blue_bright" />
     </LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.a20151inf0182.organizeme;
+package com.example.a20151inf0182.organizeme.Activity;
 
 import android.content.Context;
 import android.database.SQLException;
