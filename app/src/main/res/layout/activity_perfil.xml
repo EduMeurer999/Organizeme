@@ -56,17 +56,18 @@
             android:layout_height="0dp"
             android:text="Curso" />
 
+        <TextView
+            android:id="@+id/txtSerie"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="Série" />
+
         <Button
             android:id="@+id/btnEditar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="Editar" />
 
-        <TextView
-            android:id="@+id/txtSerie"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:text="Série" />
     </LinearLayout>
 
 </LinearLayout>
