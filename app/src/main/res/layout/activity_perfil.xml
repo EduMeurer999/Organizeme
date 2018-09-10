@@ -11,14 +11,6 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="vertical">
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"
@@ -52,34 +44,44 @@
             android:id="@+id/txtNome"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_weight="1"
             android:text="Nome" />
 
         <TextView
             android:id="@+id/txtIdade"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_weight="1"
             android:text="Idade" />
 
         <TextView
             android:id="@+id/txtEmail"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_weight="1"
             android:text="E-mail" />
 
         <TextView
             android:id="@+id/txtCurso"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_weight="1"
             android:text="Curso" />
 
-            <Button
-                android:id="@+id/btnEditar2"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:text="Editar" />
+        <TextView
+            android:id="@+id/txtSerie"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Série" />
 
-            <ViewSwitcher
+        <Button
+            android:id="@+id/btnEditar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Editar" />
+
+        <ViewSwitcher
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -93,14 +95,14 @@
                     android:visibility="invisible">
 
                     <EditText
-                        android:id="@+id/edtNome2"
+                        android:id="@+id/edtNome"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:inputType="textPersonName" />
 
                     <EditText
-                        android:id="@+id/edtEmail2"
+                        android:id="@+id/edtEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -164,17 +166,6 @@
             </ViewSwitcher>
 
         </LinearLayout>
-        <TextView
-            android:id="@+id/txtSerie"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:text="Série" />
-
-        <Button
-            android:id="@+id/btnEditar"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Editar" />
 
     </LinearLayout>
 
