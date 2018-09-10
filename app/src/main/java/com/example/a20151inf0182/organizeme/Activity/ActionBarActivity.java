@@ -17,7 +17,7 @@ public class ActionBarActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.toolbar);
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//       Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
     }
