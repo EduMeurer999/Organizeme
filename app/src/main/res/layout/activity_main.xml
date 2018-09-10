@@ -23,35 +23,52 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="29dp"
-            android:text="E-mail" />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/edtEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textEmailAddress" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="29dp"
+                android:text="E-mail" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="29dp"
-            android:text="Senha" />
+            <EditText
+                android:id="@+id/edtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textEmailAddress" />
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/edtSenha"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword" />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="29dp"
+                android:text="Senha" />
+
+            <EditText
+                android:id="@+id/edtSenha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnLogar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login" />
+            android:text="Login"
+            android:layout_marginTop="20dp"/>
 
     </LinearLayout>
 
@@ -59,6 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
+        android:gravity="center_vertical|center_horizontal"
         android:orientation="vertical">
 
         <TextView
@@ -67,7 +85,7 @@
             android:layout_height="wrap_content"
             android:text="Não é cadastrado? Clique aqui"
             android:textAlignment="center"
-            android:textColor="@android:color/holo_blue_bright" />
+            android:textColor="#1a73e8" />
     </LinearLayout>
 
 </LinearLayout>
