@@ -39,7 +39,7 @@ public class PerfilActivity extends AppCompatActivity {
 
 
     }
-    public void btnEditarAction(){
+    /*public void btnEditarAction(){
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,5 +49,5 @@ public class PerfilActivity extends AppCompatActivity {
                 myTV.setText("value");
             }
         });
-    }
+    }*/
 }
