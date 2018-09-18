@@ -6,21 +6,17 @@ package com.example.a20151inf0182.organizeme.Entidades;
 
 public class Usuarios {
 
-    private String id;
     private String email;
     private String senha;
     private String nome;
+    private String curso;
+    private int idade;
+    private int serie;
+
 
     public Usuarios() {
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getEmail() {
         return email;
@@ -44,5 +40,29 @@ public class Usuarios {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public int getSerie() {
+        return serie;
+    }
+
+    public void setSerie(int serie) {
+        this.serie = serie;
     }
 }
