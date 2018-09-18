@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         txtCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent telaCadastro = new Intent(MainActivity.this, NotasActivity.class);
+                Intent telaCadastro = new Intent(MainActivity.this, CadastroActivity.class);
                 startActivity(telaCadastro);
             }
         });
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void validarLogin(Usuarios usuarios){
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-
+        Toast.makeText(MainActivity.this, usuarios.getSenha(), Toast.LENGTH_LONG);
         autenticacao.signInWithEmailAndPassword(usuarios.getEmail(), usuarios.getSenha()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -84,13 +84,14 @@ public class MainActivity extends AppCompatActivity {
                         abrirTelaPrincipal();
                         Toast.makeText(MainActivity.this, "Login efetuado com sucesso", Toast.LENGTH_SHORT).show();
                     }else{
-                        Toast.makeText(MainActivity.this, ""+task.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Usuário inexistente", Toast.LENGTH_SHORT).show();
                     }
             }
         });
 
     }
     public void abrirTelaPrincipal(){
+
         Intent intentAbrirTelaPrincipal = new Intent(MainActivity.this, PerfilActivity.class);
         startActivity(intentAbrirTelaPrincipal);
     }

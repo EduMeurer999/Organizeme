@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.a20151inf0182.organizeme.Entidades.Usuarios;
 import com.example.a20151inf0182.organizeme.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -13,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 public class CadastroActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +30,14 @@ public class CadastroActivity extends AppCompatActivity {
         String senhaC = edtSenhaC.getText().toString();
         if(!nome.equals("") && !email.equals("") && !senha.equals("") && senhaC.equals("")){
             if(senha.equals(senhaC)){
-                final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference ref = database.getReference("server/saving-data/fireblog");
+                Usuarios usuario = new Usuarios();
+                usuario.setEmail(email);
+                usuario.setSenha(senha);
+                usuario.setNome(nome);
+                cadastrarUsuario(usuario);
+
+
+
             }
             else{
                 Toast.makeText(CadastroActivity.this, "As senhas não coincidem", Toast.LENGTH_SHORT).show();
@@ -39,6 +47,11 @@ public class CadastroActivity extends AppCompatActivity {
             Toast.makeText(CadastroActivity.this, "Todos os campos deverão ser preenchidos", Toast.LENGTH_SHORT).show();
         }
 
+
+
+    }
+
+    public void cadastrarUsuario(Usuarios user){
 
 
     }

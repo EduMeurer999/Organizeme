@@ -10,26 +10,11 @@ import com.example.a20151inf0182.organizeme.R;
 
 public class PerfilActivity extends AppCompatActivity {
 
-
-    TextView txtNome = (TextView)findViewById(R.id.txtNome);
-    TextView txtEmail = (TextView)findViewById(R.id.txtEmail);
-    TextView txtCurso = (TextView)findViewById(R.id.txtCurso);
-    TextView txtSerie = (TextView)findViewById(R.id.txtSerie);
-    TextView txtIdade = (TextView)findViewById(R.id.txtIdade);
-    TextView[] TXTs = new TextView[5];
-    EditText[] EDTs = new EditText[5];
-
-    Button btnEditar = (Button)findViewById(R.id.btnEditar);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
-        TXTs[0] = txtNome;
-        TXTs[1] = txtEmail;
-        TXTs[2] = txtCurso;
-        TXTs[3] = txtSerie;
-        TXTs[4] = txtIdade;
+
 
 
 
