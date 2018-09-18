@@ -3,8 +3,13 @@ package com.example.a20151inf0182.organizeme.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.a20151inf0182.organizeme.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+
 
 
 public class CadastroActivity extends AppCompatActivity {
@@ -18,7 +23,37 @@ public class CadastroActivity extends AppCompatActivity {
         EditText edtSenha = (EditText) findViewById(R.id.edtSenha);
         EditText edtSenhaC = (EditText) findViewById(R.id.edtSenhaC);
         String nome = edtNome.getText().toString();
-        String Email = edtEmail.getText().toString();
+        String email = edtEmail.getText().toString();
+        String senha = edtSenha.getText().toString();
+        String senhaC = edtSenhaC.getText().toString();
+        if(!nome.equals("") && !email.equals("") && !senha.equals("") && senhaC.equals("")){
+            if(senha.equals(senhaC)){
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference ref = database.getReference("server/saving-data/fireblog");
+            }
+            else{
+                Toast.makeText(CadastroActivity.this, "As senhas não coincidem", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else{
+            Toast.makeText(CadastroActivity.this, "Todos os campos deverão ser preenchidos", Toast.LENGTH_SHORT).show();
+        }
+
+
 
     }
+//    public byte[] encriptarSenha(String senha){
+//        try {
+//            MessageDigest enc = MessageDigest.getInstance("MD5");
+//           byte messageDigest[] = enc.digest(senha.getBytes("UTF-8"));
+//            return messageDigest;
+//        } catch (NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//            return null;
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//
+//  }
 }

@@ -1,6 +1,7 @@
 package com.example.a20151inf0182.organizeme.Activity;
 
 import android.content.Intent;
+
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,11 +28,13 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth autenticacao;
     private Usuarios usuarios;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //fazer a tela de login video aula 3
+        autenticacao = FirebaseAuth.getInstance();
         edtEmail = (EditText) findViewById(R.id.edtEmail);
         edtSenha = (EditText) findViewById(R.id.edtSenha);
         btnLogar = (Button) findViewById(R.id.btnLogar);
@@ -42,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                     usuarios = new Usuarios();
                     usuarios.setEmail(edtEmail.getText().toString());
                     usuarios.setSenha(edtSenha.getText().toString());
-                    validarLogin();
+                    validarLogin(usuarios);
                 }else{
                     Toast.makeText(MainActivity.this, "Preencha os campos", Toast.LENGTH_SHORT).show();
                 }
@@ -61,19 +65,30 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void validarLogin(){
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = autenticacao.getCurrentUser();
+        updateUI(currentUser); // caso algum usuarios estiver logado
+    }
+    private void updateUI(FirebaseUser user) {
+
+    }
+    private void validarLogin(Usuarios usuarios){
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-        autenticacao.signInWithEmailAndPassword(usuarios.getEmail(), usuarios.getSenha()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+        autenticacao.signInWithEmailAndPassword(usuarios.getEmail(), usuarios.getSenha()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         abrirTelaPrincipal();
                         Toast.makeText(MainActivity.this, "Login efetuado com sucesso", Toast.LENGTH_SHORT).show();
                     }else{
-                        Toast.makeText(MainActivity.this, "Login não efetuado com sucesso", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, ""+task.toString(), Toast.LENGTH_SHORT).show();
                     }
             }
         });
+
     }
     public void abrirTelaPrincipal(){
         Intent intentAbrirTelaPrincipal = new Intent(MainActivity.this, PerfilActivity.class);

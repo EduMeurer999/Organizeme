@@ -1,5 +1,7 @@
 package com.example.a20151inf0182.organizeme.DAO;
 
+import android.support.v7.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -8,7 +10,8 @@ import com.google.firebase.database.FirebaseDatabase;
  * Created by 20151inf0115 on 03/09/2018.
  */
 
-public class ConfiguracaoFirebase {
+public class ConfiguracaoFirebase{
+
     private static DatabaseReference referenciaFirebase;
     private static FirebaseAuth autenticacao;
 
