@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         txtCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent telaCadastro = new Intent(MainActivity.this, CadastroActivity.class);
+                Intent telaCadastro = new Intent(MainActivity.this, NotasActivity.class);
                 startActivity(telaCadastro);
             }
         });
