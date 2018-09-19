@@ -26,29 +26,36 @@ public class MainActivity extends AppCompatActivity {
     private EditText edtSenha;
     private Button btnLogar;
     private FirebaseAuth autenticacao;
-    private Usuarios usuarios;
+    private Usuarios usuario;
+    private FirebaseUser usuarioConectado;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         //fazer a tela de login video aula 3
         autenticacao = FirebaseAuth.getInstance();
+        usuarioConectado = autenticacao.getCurrentUser();
         edtEmail = (EditText) findViewById(R.id.edtEmail);
         edtSenha = (EditText) findViewById(R.id.edtSenha);
         btnLogar = (Button) findViewById(R.id.btnLogar);
+        if (usuarioConectado != null){
+            abrirTelaPrincipal();
 
+
+        }
         btnLogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!edtEmail.getText().toString().equals("") && !edtSenha.getText().toString().equals("")){
-                    usuarios = new Usuarios();
-                    usuarios.setEmail(edtEmail.getText().toString());
-                    usuarios.setSenha(edtSenha.getText().toString());
-                    validarLogin(usuarios);
+                    usuario = new Usuarios();
+                    usuario.setEmail(edtEmail.getText().toString());
+                    usuario.setSenha(edtSenha.getText().toString());
+                    validarLogin(usuario);
                 }else{
-                    Toast.makeText(MainActivity.this, "Preencha os campos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Há algo errado", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -65,19 +72,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = autenticacao.getCurrentUser();
-        updateUI(currentUser); // caso algum usuarios estiver logado
-    }
-    private void updateUI(FirebaseUser user) {
 
-    }
-    private void validarLogin(Usuarios usuarios){
+    private void validarLogin(Usuarios usuario){
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-        Toast.makeText(MainActivity.this, usuarios.getSenha(), Toast.LENGTH_LONG);
-        autenticacao.signInWithEmailAndPassword(usuarios.getEmail(), usuarios.getSenha()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        Toast.makeText(MainActivity.this, usuario.getSenha(), Toast.LENGTH_LONG);
+        autenticacao.signInWithEmailAndPassword(usuario.getEmail(), usuario.getSenha()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
