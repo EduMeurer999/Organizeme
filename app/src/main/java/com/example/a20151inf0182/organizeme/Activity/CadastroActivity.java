@@ -1,5 +1,6 @@
 package com.example.a20151inf0182.organizeme.Activity;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,23 +19,24 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.example.a20151inf0182.organizeme.Activity.MainActivity;
 
 
 public class CadastroActivity extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
-    private FirebaseUser usuarioConectado;
 
 // ...
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mAuth = FirebaseAuth.getInstance();
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
 
         final EditText edtNome = (EditText) findViewById(R.id.edtNome);
         final EditText edtEmail = (EditText) findViewById(R.id.edtEmail);
@@ -66,50 +68,49 @@ public class CadastroActivity extends AppCompatActivity {
                         !senhaC.equals("")) {
 
                     if (senha.equals(senhaC)) {
-                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
                             Toast.makeText(CadastroActivity.this, "Há algum usuário conectado o momento! Por favor desconecte para continuar",
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             // No user is signed in
 
-                            Usuarios usuario = new Usuarios();
-                            usuario.setNome(nome);
-                            usuario.setEmail(email);
-                            usuario.setSenha(senha);
-//                            usuario.setCurso(curso);
-//                            usuario.setSerie(serie);
-//                            usuario.setIdade(idade);
+                            Usuarios usuarioCadastro = new Usuarios();
+                            usuarioCadastro.setNome(nome);
+                            usuarioCadastro.setEmail(email);
+                            usuarioCadastro.setSenha(senha);
+//                            usuarioCadastro.setCurso(curso);
+//                            usuarioCadastro.setSerie(serie);
+//                            usuarioCadastro.setIdade(idade);
 
-                            mDatabase.child("Usuarios").child(usuario.getNome()).child("nome").setValue(usuario.getNome());
-                            mDatabase.child("Usuarios").child(usuario.getNome()).child("email").setValue(usuario.getEmail());
-//                        mDatabase.child("Usuarios").child(usuario.getNome()).child("curso").setValue(usuario.getCurso());
-//                        mDatabase.child("Usuarios").child(usuario.getNome()).child("serie").setValue(usuario.getSerie());
-//                        mDatabase.child("Usuarios").child(usuario.getNome()).child("idade").setValue(usuario.getIdade());
 
-                            mAuth.createUserWithEmailAndPassword(email, senha)
+                            DatabaseReference usuarioAtual = mDatabase.child("Usuarios").child(usuarioCadastro.getNome());
+                            usuarioAtual.child("nome").setValue(usuarioCadastro.getNome());
+                            usuarioAtual.child("email").setValue(usuarioCadastro.getEmail());
+//                            usuarioAtual.child("curso").setValue(usuarioCadastro.getCurso());
+//                            usuarioAtual.child("serie").setValue(usuarioCadastro.getSerie());
+//                            usuarioAtual.child("idade").setValue(usuarioCadastro.getIdade());
+
+
+
+                            mAuth.createUserWithEmailAndPassword(usuarioCadastro.getEmail(), usuarioCadastro.getSenha())
                                     .addOnCompleteListener(CadastroActivity.this, new OnCompleteListener<AuthResult>() {
                                         @Override
                                         public void onComplete(@NonNull Task<AuthResult> task) {
                                             if (task.isSuccessful()) {
                                                 // Sign in success, update UI with the signed-in user's information
-                                                usuarioConectado = mAuth.getCurrentUser();
                                                 Toast.makeText(CadastroActivity.this, "Cadastro realizado com sucesso!",
                                                         Toast.LENGTH_SHORT).show();
+                                                startActivity(new Intent(CadastroActivity.this, MainActivity.class));
+
 
                                             } else {
                                                 // If sign in fails, display a message to the user.
                                                 Toast.makeText(CadastroActivity.this, "Authentication failed.",
                                                         Toast.LENGTH_SHORT).show();
-                                                usuarioConectado = null;
                                             }
                                         }
                                     });
-//                usuario.setCurso(curso);
-//                usuario.setSerie(serie);
-//                usuario.setIdade(idade);
-
-
                         }
                     } else {
                         Toast.makeText(CadastroActivity.this, "As senhas não coincidem", Toast.LENGTH_SHORT).show();

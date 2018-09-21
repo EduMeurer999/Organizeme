@@ -1,5 +1,6 @@
 package com.example.a20151inf0182.organizeme.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.example.a20151inf0182.organizeme.DAO.ConfiguracaoFirebase;
 import com.example.a20151inf0182.organizeme.Entidades.Usuarios;
 import com.example.a20151inf0182.organizeme.R;
+import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         edtSenha = (EditText) findViewById(R.id.edtSenha);
         btnLogar = (Button) findViewById(R.id.btnLogar);
         if (usuarioConectado != null){
-            abrirTelaPrincipal();
+            startActivity(new Intent(MainActivity.this, PerfilActivity.class));
 
 
         }
@@ -73,14 +75,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void validarLogin(Usuarios usuario){
+    public void validarLogin(Usuarios usuario){
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         Toast.makeText(MainActivity.this, usuario.getSenha(), Toast.LENGTH_LONG);
         autenticacao.signInWithEmailAndPassword(usuario.getEmail(), usuario.getSenha()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        abrirTelaPrincipal();
+                        startActivity(new Intent(MainActivity.this, PerfilActivity.class));
                         Toast.makeText(MainActivity.this, "Login efetuado com sucesso", Toast.LENGTH_SHORT).show();
                     }else{
                         Toast.makeText(MainActivity.this, "Usuário inexistente", Toast.LENGTH_SHORT).show();
@@ -89,9 +91,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    public void abrirTelaPrincipal(){
 
-        Intent intentAbrirTelaPrincipal = new Intent(MainActivity.this, PerfilActivity.class);
-        startActivity(intentAbrirTelaPrincipal);
-    }
 }
