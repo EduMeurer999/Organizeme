@@ -17,9 +17,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.example.a20151inf0182.organizeme.Activity.MainActivity;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class CadastroActivity extends AppCompatActivity {
@@ -51,7 +55,7 @@ public class CadastroActivity extends AppCompatActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nome = edtNome.getText().toString();
+                final String[] nome = {edtNome.getText().toString()};
                 String email = edtEmail.getText().toString();
                 String senha = edtSenha.getText().toString();
                 String senhaC = edtSenhaC.getText().toString();
@@ -60,7 +64,7 @@ public class CadastroActivity extends AppCompatActivity {
 //        int idade = Integer.parseInt(edtIdade.getText().toString());
 
 
-                if (!nome.equals("") && !email.equals("") &&
+                if (!nome[0].equals("") && !email.equals("") &&
 //                        !curso.equals("") &&
 //                        !serie.equals("") &&
 //                        !idade.equals(null) &&
@@ -76,7 +80,7 @@ public class CadastroActivity extends AppCompatActivity {
                             // No user is signed in
 
                             Usuarios usuarioCadastro = new Usuarios();
-                            usuarioCadastro.setNome(nome);
+                            usuarioCadastro.setNome(nome[0]);
                             usuarioCadastro.setEmail(email);
                             usuarioCadastro.setSenha(senha);
 //                            usuarioCadastro.setCurso(curso);
@@ -87,6 +91,25 @@ public class CadastroActivity extends AppCompatActivity {
                             DatabaseReference usuarioAtual = mDatabase.child("Usuarios").child(usuarioCadastro.getNome());
                             usuarioAtual.child("nome").setValue(usuarioCadastro.getNome());
                             usuarioAtual.child("email").setValue(usuarioCadastro.getEmail());
+
+
+                            Query query = mDatabase.orderByChild("email").equalTo("edumeurer999@gmail.com");
+                            query.addValueEventListener(new ValueEventListener() {
+                                String nomeTeste;
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    nomeTeste = dataSnapshot.getValue(String.class);
+                                    Toast.makeText(CadastroActivity.this, ""+nomeTeste,
+                                            Toast.LENGTH_SHORT).show();
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    nomeTeste = databaseError.toString();
+                                }
+                            });
+
 //                            usuarioAtual.child("curso").setValue(usuarioCadastro.getCurso());
 //                            usuarioAtual.child("serie").setValue(usuarioCadastro.getSerie());
 //                            usuarioAtual.child("idade").setValue(usuarioCadastro.getIdade());
