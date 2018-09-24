@@ -21,6 +21,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,12 +34,14 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth autenticacao;
     private Usuarios usuario;
     private FirebaseUser usuarioConectado;
+    private DatabaseReference mDatabase;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         //fazer a tela de login video aula 3
         autenticacao = FirebaseAuth.getInstance();
@@ -43,11 +49,36 @@ public class MainActivity extends AppCompatActivity {
         edtEmail = (EditText) findViewById(R.id.edtEmail);
         edtSenha = (EditText) findViewById(R.id.edtSenha);
         btnLogar = (Button) findViewById(R.id.btnLogar);
+        Button btnTeste = (Button) findViewById(R.id.btnTeste);
+        final TextView tvTeste = (TextView) findViewById(R.id.tvTeste);
+        btnTeste.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = "tes.te123ee@email.com";
+                int posicao = email.indexOf("@");
+                for(int i =0; i< email.length(); i++){
+
+
+                }
+//                if(email.indexOf(".") != -1){
+//                    if(email.indexOf(".") > posicao){
+//                        tvTeste.setText(""+email.indexOf("."));
+//                    }
+//                }
+
+
+//                tvTeste.setText(""+posicao);
+
+
+            }
+        });
         if (usuarioConectado != null){
             startActivity(new Intent(MainActivity.this, PerfilActivity.class));
 
 
         }
+
+
         btnLogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

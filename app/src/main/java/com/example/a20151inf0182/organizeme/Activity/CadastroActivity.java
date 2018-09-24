@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.example.a20151inf0182.organizeme.Entidades.Usuarios;
 import com.example.a20151inf0182.organizeme.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -55,7 +54,7 @@ public class CadastroActivity extends AppCompatActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String[] nome = {edtNome.getText().toString()};
+                final String nome = edtNome.getText().toString();
                 String email = edtEmail.getText().toString();
                 String senha = edtSenha.getText().toString();
                 String senhaC = edtSenhaC.getText().toString();
@@ -64,7 +63,7 @@ public class CadastroActivity extends AppCompatActivity {
 //        int idade = Integer.parseInt(edtIdade.getText().toString());
 
 
-                if (!nome[0].equals("") && !email.equals("") &&
+                if (!nome.equals("") && !email.equals("") &&
 //                        !curso.equals("") &&
 //                        !serie.equals("") &&
 //                        !idade.equals(null) &&
@@ -80,35 +79,21 @@ public class CadastroActivity extends AppCompatActivity {
                             // No user is signed in
 
                             Usuarios usuarioCadastro = new Usuarios();
-                            usuarioCadastro.setNome(nome[0]);
+                            usuarioCadastro.setNome(nome);
                             usuarioCadastro.setEmail(email);
                             usuarioCadastro.setSenha(senha);
 //                            usuarioCadastro.setCurso(curso);
 //                            usuarioCadastro.setSerie(serie);
 //                            usuarioCadastro.setIdade(idade);
 
+                            String emailCadastro = usuarioCadastro.getEmail().replace("@","()");
+                            int posicaoArroba = usuarioCadastro.getEmail().indexOf("@");
 
-                            DatabaseReference usuarioAtual = mDatabase.child("Usuarios").child(usuarioCadastro.getNome());
+
+                            DatabaseReference usuarioAtual = mDatabase.child("Usuarios").child(emailCadastro);
                             usuarioAtual.child("nome").setValue(usuarioCadastro.getNome());
                             usuarioAtual.child("email").setValue(usuarioCadastro.getEmail());
 
-
-                            Query query = mDatabase.orderByChild("email").equalTo("edumeurer999@gmail.com");
-                            query.addValueEventListener(new ValueEventListener() {
-                                String nomeTeste;
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    nomeTeste = dataSnapshot.getValue(String.class);
-                                    Toast.makeText(CadastroActivity.this, ""+nomeTeste,
-                                            Toast.LENGTH_SHORT).show();
-
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-                                    nomeTeste = databaseError.toString();
-                                }
-                            });
 
 //                            usuarioAtual.child("curso").setValue(usuarioCadastro.getCurso());
 //                            usuarioAtual.child("serie").setValue(usuarioCadastro.getSerie());
