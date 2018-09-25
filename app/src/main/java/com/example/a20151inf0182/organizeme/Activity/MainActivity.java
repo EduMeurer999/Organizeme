@@ -1,9 +1,8 @@
 package com.example.a20151inf0182.organizeme.Activity;
 
-import android.content.Context;
 import android.content.Intent;
-
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,16 +14,18 @@ import android.widget.Toast;
 import com.example.a20151inf0182.organizeme.DAO.ConfiguracaoFirebase;
 import com.example.a20151inf0182.organizeme.Entidades.Usuarios;
 import com.example.a20151inf0182.organizeme.R;
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private Usuarios usuario;
     private FirebaseUser usuarioConectado;
     private DatabaseReference mDatabase;
-
+    private Button btnTeste;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,29 +50,38 @@ public class MainActivity extends AppCompatActivity {
         edtEmail = (EditText) findViewById(R.id.edtEmail);
         edtSenha = (EditText) findViewById(R.id.edtSenha);
         btnLogar = (Button) findViewById(R.id.btnLogar);
-        Button btnTeste = (Button) findViewById(R.id.btnTeste);
-        final TextView tvTeste = (TextView) findViewById(R.id.tvTeste);
+        btnTeste = (Button) findViewById(R.id.btnTeste);
+
         btnTeste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = "tes.te123ee@email.com";
-                int posicao = email.indexOf("@");
-                for(int i =0; i< email.length(); i++){
+                final Usuarios usuario = new Usuarios();
+                usuario.setSenha(edtSenha.getText().toString());
+                mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                            if(snapshot.child("email").getValue() == edtEmail.getText().toString()) {
+                                usuario.setId((String) snapshot.getKey().toString());
+                                usuario.setNome((String) snapshot.child("nome").getValue());
+                                usuario.setEmail((String) snapshot.child("email").getValue());
+                                break;
+                            }
 
+                        }
+                    }
 
-                }
-//                if(email.indexOf(".") != -1){
-//                    if(email.indexOf(".") > posicao){
-//                        tvTeste.setText(""+email.indexOf("."));
-//                    }
-//                }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-
-//                tvTeste.setText(""+posicao);
+                    }
+                });
+                Toast.makeText(MainActivity.this, ""+usuario.getNome(), Toast.LENGTH_SHORT).show();
 
 
             }
         });
+        final TextView tvTeste = (TextView) findViewById(R.id.tvTeste);
         if (usuarioConectado != null){
             startActivity(new Intent(MainActivity.this, PerfilActivity.class));
 
@@ -79,13 +89,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+
+
+
         btnLogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!edtEmail.getText().toString().equals("") && !edtSenha.getText().toString().equals("")){
-                    usuario = new Usuarios();
-                    usuario.setEmail(edtEmail.getText().toString());
-                    usuario.setSenha(edtSenha.getText().toString());
+
                     validarLogin(usuario);
                 }else{
                     Toast.makeText(MainActivity.this, "Há algo errado", Toast.LENGTH_SHORT).show();
@@ -95,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         TextView txtCadastro = findViewById(R.id.txtCadastro);
+
         txtCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,14 +118,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void validarLogin(Usuarios usuario){
-        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+    public void validarLogin(final Usuarios usuario){
+        autenticacao = FirebaseAuth.getInstance();
         Toast.makeText(MainActivity.this, usuario.getSenha(), Toast.LENGTH_LONG);
         autenticacao.signInWithEmailAndPassword(usuario.getEmail(), usuario.getSenha()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        startActivity(new Intent(MainActivity.this, PerfilActivity.class));
+                        Intent mainToPerfil = new Intent(MainActivity.this, PerfilActivity.class);
+                        mainToPerfil.putExtra("email", usuario.getEmail());
+                        startActivity(mainToPerfil);
                         Toast.makeText(MainActivity.this, "Login efetuado com sucesso", Toast.LENGTH_SHORT).show();
                     }else{
                         Toast.makeText(MainActivity.this, "Usuário inexistente", Toast.LENGTH_SHORT).show();

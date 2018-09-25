@@ -1,5 +1,6 @@
 package com.example.a20151inf0182.organizeme.Activity;
 
+import org.kamal.crypto.SimpleProtector;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -85,12 +86,15 @@ public class CadastroActivity extends AppCompatActivity {
 //                            usuarioCadastro.setCurso(curso);
 //                            usuarioCadastro.setSerie(serie);
 //                            usuarioCadastro.setIdade(idade);
+                            String emailCriptografado = "";
+                            try {
+                                emailCriptografado = SimpleProtector.encrypt(usuarioCadastro.getEmail());
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
 
-                            String emailCadastro = usuarioCadastro.getEmail().replace("@","()");
-                            int posicaoArroba = usuarioCadastro.getEmail().indexOf("@");
 
-
-                            DatabaseReference usuarioAtual = mDatabase.child("Usuarios").child(emailCadastro);
+                            DatabaseReference usuarioAtual = mDatabase.child("Usuarios").push();
                             usuarioAtual.child("nome").setValue(usuarioCadastro.getNome());
                             usuarioAtual.child("email").setValue(usuarioCadastro.getEmail());
 
@@ -107,11 +111,9 @@ public class CadastroActivity extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<AuthResult> task) {
                                             if (task.isSuccessful()) {
                                                 // Sign in success, update UI with the signed-in user's information
-                                                Toast.makeText(CadastroActivity.this, "Cadastro realizado com sucesso!",
-                                                        Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(CadastroActivity.this, "Cadastro realizado com sucesso!", Toast.LENGTH_SHORT).show();
                                                 startActivity(new Intent(CadastroActivity.this, MainActivity.class));
-
-
+                                                finish();
                                             } else {
                                                 // If sign in fails, display a message to the user.
                                                 Toast.makeText(CadastroActivity.this, "Authentication failed.",

@@ -6,6 +6,7 @@ package com.example.a20151inf0182.organizeme.Entidades;
 
 public class Usuarios {
 
+    private String id;
     private String email;
     private String senha;
     private String nome;
@@ -13,10 +14,17 @@ public class Usuarios {
     private int idade;
     private int serie;
 
+    public Usuarios(){
 
-    public Usuarios() {
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getEmail() {
         return email;
