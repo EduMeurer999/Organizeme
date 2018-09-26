@@ -2,7 +2,6 @@ package com.example.a20151inf0182.organizeme.Activity;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,18 +17,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
-import static android.os.Build.ID;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
         final TextView tvTeste = (TextView) findViewById(R.id.tvTeste);
         if (usuarioConectado != null){
             edtEmail.setText(usuarioConectado.getEmail().toString());
@@ -71,10 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
-
-
-
-
 
         btnLogar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                                         usuario.setNome((String) snapshot.child("nome").getValue().toString());
                                         Toast.makeText(MainActivity.this, ""+usuario.getId(), Toast.LENGTH_SHORT).show();
                                         Intent mainToPerfil = new Intent(MainActivity.this, PerfilActivity.class);
-                                        mainToPerfil.putExtra("ID",usuario.getId());
+                                        mainToPerfil.putExtra("Usuario",usuario);
                                         startActivity(mainToPerfil);
                                         Toast.makeText(MainActivity.this, "Login efetuado com sucesso", Toast.LENGTH_SHORT).show();
                                         finish();

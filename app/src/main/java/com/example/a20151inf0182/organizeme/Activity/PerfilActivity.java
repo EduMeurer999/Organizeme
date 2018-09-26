@@ -40,8 +40,7 @@ public class PerfilActivity extends AppCompatActivity {
         usuarioConectado = mAuth.getCurrentUser();
 
         Intent i = getIntent();
-        Usuarios usuario = new Usuarios();
-        usuario.setId((String) i.getExtras().get("ID"));
+        Usuarios usuario = (Usuarios) i.getSerializableExtra("Usuario");
 
         Toast.makeText(this, ""+usuario.getId(), Toast.LENGTH_SHORT).show();
         final TextView tvNome = (TextView) findViewById(R.id.txtNome);
