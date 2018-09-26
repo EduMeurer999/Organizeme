@@ -32,6 +32,8 @@ public class PerfilActivity extends AppCompatActivity {
     private static final String TAG = "PerfilActivity";
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,14 +42,15 @@ public class PerfilActivity extends AppCompatActivity {
         mAuth = ConfiguracaoFirebase.getFirebaseAuth();
         usuarioConectado = mAuth.getCurrentUser();
 
-        Intent i = getIntent();
-        Usuarios usuario = (Usuarios) i.getSerializableExtra("Usuario");
-
         final TextView tvNome = (TextView) findViewById(R.id.txtNome);
         final TextView tvIdade = (TextView) findViewById(R.id.txtIdade);
         final TextView tvCurso = (TextView) findViewById(R.id.txtCurso);
         final TextView tvEmail = (TextView) findViewById(R.id.txtEmail);
         final TextView tvSerie = (TextView) findViewById(R.id.txtSerie);
+        final Button btnEditar = (Button) findViewById(R.id.btnEditar);
+        Intent i = getIntent();
+        Usuarios usuario = (Usuarios) i.getSerializableExtra("Usuario");
+
 
         tvNome.setText("Nome: "+usuario.getNome());
         tvEmail.setText("Email: "+usuario.getEmail());
@@ -65,17 +68,14 @@ public class PerfilActivity extends AppCompatActivity {
 
 
     }
-    public void btnEditarAction(){
-        btnEditar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ViewSwitcher switcher = (ViewSwitcher) findViewById(R.id.swEditar);
-                switcher.showNext(); //or switcher.showPrevious();
-                TextView myTV = (TextView) switcher.findViewById(R.id.);
-                myTV.setText("value");
-            }
-        });
-    }
+//    public void btnEditarAction(){
+//        btnEditar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(PerfilActivity.this, TesteActivity.class));
+//            }
+//        });
+//    }
 
 
 }

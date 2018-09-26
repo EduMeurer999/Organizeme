@@ -23,7 +23,15 @@
         <activity android:name=".Activity.PerfilActivity$addTarefa" />
         <activity android:name=".Activity.AddTarefa" />
         <activity android:name=".Activity.NotasActivity" />
-        <activity android:name=".Activity.tarefaActivity"></activity>
+        <activity android:name=".Activity.tarefaActivity" />
+        <activity
+            android:name=".PerfilActivity"
+            android:label="@string/title_activity_perfil"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.TesteActivity"
+            android:label="@string/title_activity_teste"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
