@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.a20151inf0182.organizeme.DAO.ConfiguracaoFirebase;
 import com.example.a20151inf0182.organizeme.Entidades.Usuarios;
 import com.example.a20151inf0182.organizeme.R;
@@ -26,64 +25,49 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+import static android.os.Build.ID;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText edtEmail;
     private EditText edtSenha;
     private Button btnLogar;
-    private FirebaseAuth autenticacao;
-    private Usuarios usuario;
+
+    private FirebaseAuth Auth;
     private FirebaseUser usuarioConectado;
-    private DatabaseReference mDatabase;
+    private DatabaseReference Database;
     private Button btnTeste;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        //fazer a tela de login video aula 3
-        autenticacao = FirebaseAuth.getInstance();
-        usuarioConectado = autenticacao.getCurrentUser();
+        Database = ConfiguracaoFirebase.getDatabaseReference();
+        Auth = ConfiguracaoFirebase.getFirebaseAuth();
+        final Usuarios usuario = new Usuarios();
+        usuarioConectado = Auth.getCurrentUser();
         edtEmail = (EditText) findViewById(R.id.edtEmail);
         edtSenha = (EditText) findViewById(R.id.edtSenha);
         btnLogar = (Button) findViewById(R.id.btnLogar);
         btnTeste = (Button) findViewById(R.id.btnTeste);
-
         btnTeste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Usuarios usuario = new Usuarios();
-                usuario.setSenha(edtSenha.getText().toString());
-                mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot snapshot: dataSnapshot.getChildren()){
-                            if(snapshot.child("email").getValue() == edtEmail.getText().toString()) {
-                                usuario.setId((String) snapshot.getKey().toString());
-                                usuario.setNome((String) snapshot.child("nome").getValue());
-                                usuario.setEmail((String) snapshot.child("email").getValue());
-                                break;
-                            }
 
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-                Toast.makeText(MainActivity.this, ""+usuario.getNome(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, ""+usuario.getId(), Toast.LENGTH_SHORT).show();
 
 
             }
         });
         final TextView tvTeste = (TextView) findViewById(R.id.tvTeste);
         if (usuarioConectado != null){
-            startActivity(new Intent(MainActivity.this, PerfilActivity.class));
+            edtEmail.setText(usuarioConectado.getEmail().toString());
+            Toast.makeText(MainActivity.this, "Por favor insira sua senha novamente", Toast.LENGTH_SHORT).show();
+//            startActivity(new Intent(MainActivity.this, PerfilActivity.class));
 
 
         }
@@ -96,8 +80,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!edtEmail.getText().toString().equals("") && !edtSenha.getText().toString().equals("")){
-
-                    validarLogin(usuario);
+                    validarLogin();
                 }else{
                     Toast.makeText(MainActivity.this, "Há algo errado", Toast.LENGTH_SHORT).show();
                 }
@@ -118,17 +101,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void validarLogin(final Usuarios usuario){
-        autenticacao = FirebaseAuth.getInstance();
-        Toast.makeText(MainActivity.this, usuario.getSenha(), Toast.LENGTH_LONG);
-        autenticacao.signInWithEmailAndPassword(usuario.getEmail(), usuario.getSenha()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+    public void validarLogin(){
+        final Usuarios usuario = new Usuarios();
+        Auth.signInWithEmailAndPassword(edtEmail.getText().toString(), edtSenha.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        Intent mainToPerfil = new Intent(MainActivity.this, PerfilActivity.class);
-                        mainToPerfil.putExtra("email", usuario.getEmail());
-                        startActivity(mainToPerfil);
-                        Toast.makeText(MainActivity.this, "Login efetuado com sucesso", Toast.LENGTH_SHORT).show();
+                        Database.child("Usuarios").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                                    if(snapshot.child("email").getValue().toString().equals(edtEmail.getText().toString())) {
+                                        usuario.setId((String) snapshot.getKey().toString());
+                                        usuario.setEmail((String) snapshot.child("email").getValue().toString());
+                                        usuario.setNome((String) snapshot.child("nome").getValue().toString());
+                                        Toast.makeText(MainActivity.this, ""+usuario.getId(), Toast.LENGTH_SHORT).show();
+                                        Intent mainToPerfil = new Intent(MainActivity.this, PerfilActivity.class);
+                                        mainToPerfil.putExtra("ID",usuario.getId());
+                                        startActivity(mainToPerfil);
+                                        Toast.makeText(MainActivity.this, "Login efetuado com sucesso", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                        break;
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
                     }else{
                         Toast.makeText(MainActivity.this, "Usuário inexistente", Toast.LENGTH_SHORT).show();
                     }

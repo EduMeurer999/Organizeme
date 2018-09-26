@@ -16,13 +16,13 @@ public class ConfiguracaoFirebase{
     private static FirebaseAuth autenticacao;
 
 
-    public static DatabaseReference getFirebase(){
+    public static DatabaseReference getDatabaseReference(){
         if(referenciaFirebase==null){
             referenciaFirebase= FirebaseDatabase.getInstance().getReference();
         }
         return referenciaFirebase;
     }
-    public static FirebaseAuth getFirebaseAutenticacao(){
+    public static FirebaseAuth getFirebaseAuth(){
         if(autenticacao==null){
             autenticacao=FirebaseAuth.getInstance();
         }

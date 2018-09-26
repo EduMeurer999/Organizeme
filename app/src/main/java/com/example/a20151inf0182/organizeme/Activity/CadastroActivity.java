@@ -1,6 +1,6 @@
 package com.example.a20151inf0182.organizeme.Activity;
 
-import org.kamal.crypto.SimpleProtector;
+
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.a20151inf0182.organizeme.DAO.ConfiguracaoFirebase;
 import com.example.a20151inf0182.organizeme.Entidades.Usuarios;
 import com.example.a20151inf0182.organizeme.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,7 +32,6 @@ public class CadastroActivity extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
-
 // ...
 
     @Override
@@ -39,8 +40,8 @@ public class CadastroActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mAuth = FirebaseAuth.getInstance();
+        mDatabase = ConfiguracaoFirebase.getDatabaseReference();
+        mAuth = ConfiguracaoFirebase.getFirebaseAuth();
 
         final EditText edtNome = (EditText) findViewById(R.id.edtNome);
         final EditText edtEmail = (EditText) findViewById(R.id.edtEmail);
@@ -74,7 +75,7 @@ public class CadastroActivity extends AppCompatActivity {
                     if (senha.equals(senhaC)) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
-                            Toast.makeText(CadastroActivity.this, "Há algum usuário conectado o momento! Por favor desconecte para continuar",
+                            Toast.makeText(CadastroActivity.this, "Há algum usuário conectado no momento! Por favor desconecte para continuar",
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             // No user is signed in
@@ -86,12 +87,6 @@ public class CadastroActivity extends AppCompatActivity {
 //                            usuarioCadastro.setCurso(curso);
 //                            usuarioCadastro.setSerie(serie);
 //                            usuarioCadastro.setIdade(idade);
-                            String emailCriptografado = "";
-                            try {
-                                emailCriptografado = SimpleProtector.encrypt(usuarioCadastro.getEmail());
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
 
 
                             DatabaseReference usuarioAtual = mDatabase.child("Usuarios").push();

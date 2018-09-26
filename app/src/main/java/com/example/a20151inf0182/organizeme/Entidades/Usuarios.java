@@ -1,10 +1,14 @@
 package com.example.a20151inf0182.organizeme.Entidades;
 
+
+
+
+
 /**
  * Created by 20151inf0115 on 04/09/2018.
  */
 
-public class Usuarios {
+public class Usuarios{
 
     private String id;
     private String email;
@@ -73,4 +77,8 @@ public class Usuarios {
     public void setSerie(int serie) {
         this.serie = serie;
     }
+
+
+
+
 }
