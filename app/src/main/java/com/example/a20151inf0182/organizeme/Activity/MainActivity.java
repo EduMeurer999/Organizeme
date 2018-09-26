@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         btnTeste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    startActivity(new Intent(MainActivity.this, TesteActivity.class));
+//                    startActivity(new Intent(MainActivity.this, TesteActivity.class));
 //                Toast.makeText(MainActivity.this, ""+usuario.getId(), Toast.LENGTH_SHORT).show();
 
 
