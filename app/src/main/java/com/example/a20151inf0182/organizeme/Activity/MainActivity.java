@@ -2,6 +2,7 @@ package com.example.a20151inf0182.organizeme.Activity;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,8 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
-//import com.example.a20151inf0182.organizeme.ApagueActivity;
 import com.example.a20151inf0182.organizeme.DAO.ConfiguracaoFirebase;
 import com.example.a20151inf0182.organizeme.Entidades.Usuarios;
 import com.example.a20151inf0182.organizeme.R;
@@ -49,10 +50,15 @@ public class MainActivity extends AppCompatActivity {
         edtSenha = (EditText) findViewById(R.id.edtSenha);
         btnLogar = (Button) findViewById(R.id.btnLogar);
         btnTeste = (Button) findViewById(R.id.btnTeste);
+
+
         btnTeste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    startActivity(new Intent(MainActivity.this, PerfilActivity.class));
+//                Intent perfil=new Intent(MainActivity.this, PerfilActivity.class);
+//                startActivity(perfil);
+//                finish();
+                // startActivity(new Intent(MainActivity.this, PerfilActivity.class));
 //                Toast.makeText(MainActivity.this, ""+usuario.getId(), Toast.LENGTH_SHORT).show();
 
 
@@ -90,23 +96,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-
-    public boolean onCreateOptionMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        int id = item.getItemId();
-        if(id==R.id.opcPerfil){
-            Intent perfil=new Intent(MainActivity.this, PerfilActivity.class);
-            startActivity(perfil);
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
 
