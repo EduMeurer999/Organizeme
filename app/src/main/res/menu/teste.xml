@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/Perfil"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:title="Perfil"
+        />
+    <item
+        android:id="@+id/Tarefas"
+        android:orderInCategory="100"
+        android:title="Minhas tarefas"
+        />
+    <item
+        android:id="@+id/Sair"
+        android:orderInCategory="100"
+        android:title="Sair"
+        />
 </menu>

@@ -3,6 +3,7 @@
     android:id="@+id/ScrollView01"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -10,8 +11,8 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        tools:context="com.example.a20151inf0182.organizeme.Activity.AddTarefa"
-        android:padding="20dp">
+        android:padding="20dp"
+        tools:context="com.example.a20151inf0182.organizeme.Activity.AddTarefa">
 
         <TextView
             android:id="@+id/textView2"
@@ -137,19 +138,31 @@
                 android:text="Integrantes" />
 
             <EditText
-                android:id="@+id/edtintegrantes"
+                android:id="@+id/edtIntegrantes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="text" />
+                android:inputType="textPersonName" />
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnCadastrar"
+        <TextView
+            android:id="@+id/tvSituacao"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cadastrar" />
+            android:layout_height="31dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnCadastrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cadastrar" />
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

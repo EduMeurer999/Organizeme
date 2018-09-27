@@ -25,10 +25,6 @@
         <activity android:name=".Activity.AddTarefa" />
         <activity android:name=".Activity.NotasActivity" />
         <activity android:name=".Activity.tarefaActivity" />
-        <activity
-            android:name=".TesteActivity"
-            android:label="@string/title_activity_teste"
-            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
