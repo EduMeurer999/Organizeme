@@ -16,6 +16,9 @@ public class Usuarios implements Serializable{
     private String curso;
     private int idade;
     private int serie;
+    private Tarefas tarefas;
+
+
 
     public Usuarios(){
 
@@ -75,6 +78,14 @@ public class Usuarios implements Serializable{
 
     public void setSerie(int serie) {
         this.serie = serie;
+    }
+
+    public Tarefas getTarefas() {
+        return tarefas;
+    }
+
+    public void setTarefas(Tarefas tarefas) {
+        this.tarefas = tarefas;
     }
 
 

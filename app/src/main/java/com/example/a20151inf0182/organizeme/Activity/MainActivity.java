@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+//import com.example.a20151inf0182.organizeme.ApagueActivity;
 import com.example.a20151inf0182.organizeme.DAO.ConfiguracaoFirebase;
 import com.example.a20151inf0182.organizeme.Entidades.Usuarios;
 import com.example.a20151inf0182.organizeme.R;
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         btnTeste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                    startActivity(new Intent(MainActivity.this, TesteActivity.class));
+                    startActivity(new Intent(MainActivity.this, PerfilActivity.class));
 //                Toast.makeText(MainActivity.this, ""+usuario.getId(), Toast.LENGTH_SHORT).show();
 
 
@@ -122,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
                                         usuario.setId((String) snapshot.getKey().toString());
                                         usuario.setEmail((String) snapshot.child("email").getValue().toString());
                                         usuario.setNome((String) snapshot.child("nome").getValue().toString());
-                                        Toast.makeText(MainActivity.this, ""+usuario.getId(), Toast.LENGTH_SHORT).show();
                                         Intent mainToPerfil = new Intent(MainActivity.this, PerfilActivity.class);
                                         mainToPerfil.putExtra("Usuario",usuario);
                                         startActivity(mainToPerfil);

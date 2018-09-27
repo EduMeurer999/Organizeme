@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
@@ -36,8 +39,10 @@ public class PerfilActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
+
 //
         mDatabase = ConfiguracaoFirebase.getDatabaseReference();
         mAuth = ConfiguracaoFirebase.getFirebaseAuth();
@@ -49,8 +54,11 @@ public class PerfilActivity extends AppCompatActivity {
         final TextView tvEmail = (TextView) findViewById(R.id.txtEmail);
         final TextView tvSerie = (TextView) findViewById(R.id.txtSerie);
         final Button btnEditar = (Button) findViewById(R.id.btnEditar);
+
         Intent i = getIntent();
         Usuarios usuario = (Usuarios) i.getSerializableExtra("Usuario");
+
+
 
 
         tvNome.setText("Nome: "+usuario.getNome());
@@ -63,7 +71,6 @@ public class PerfilActivity extends AppCompatActivity {
             }
         });
         Button btnLogout = (Button) findViewById(R.id.btnLogout);
-        DatabaseReference usuarioDatabase = null;
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +78,7 @@ public class PerfilActivity extends AppCompatActivity {
                 startActivity(new Intent(PerfilActivity.this, MainActivity.class));
             }
         });
+
 
 
     }
@@ -82,6 +90,7 @@ public class PerfilActivity extends AppCompatActivity {
 //            }
 //        });
 //    }
+
 
 
 }
