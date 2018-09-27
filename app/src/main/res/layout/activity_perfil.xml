@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.a20151inf0182.organizeme.Activity.PerfilActivity"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <include
+        layout="@layout/app_bar_apague"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -15,178 +21,190 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_apague"
         app:menu="@menu/activity_apague_drawer" />
-    <LinearLayout
+    <LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:padding="20dp">
+        tools:context="com.example.a20151inf0182.organizeme.Activity.PerfilActivity"
+        android:orientation="vertical">
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="20dp">
 
-            <ImageView
-                android:id="@+id/imvPerfil"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:adjustViewBounds="false"
-                android:cropToPadding="false"
-                android:scaleType="center"
-                app:srcCompat="@mipmap/ic_launcher_round" />
+                android:orientation="vertical">
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txtNome"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="Nome" />
-
-            <TextView
-                android:id="@+id/txtIdade"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="Idade" />
-
-            <TextView
-                android:id="@+id/txtEmail"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="E-mail" />
-
-            <TextView
-                android:id="@+id/txtCurso"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="Curso" />
-
-            <TextView
-                android:id="@+id/txtSerie"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="Série" />
-
-            <Button
-                android:id="@+id/btnEditar"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Editar" />
-
-            <Button
-                android:id="@+id/btnLogout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/holo_red_dark"
-                android:text="Sair" />
-
-            <ViewSwitcher
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:visibility="invisible">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="400dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:visibility="invisible">
-
-                    <EditText
-                        android:id="@+id/edtNome"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="textPersonName" />
-
-                    <EditText
-                        android:id="@+id/edtEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="textEmailAddress"
-                        android:text="Name" />
-
-                    <EditText
-                        android:id="@+id/edtCurso"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="Name" />
-
-                    <EditText
-                        android:id="@+id/edtSerie"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="Name" />
-
-                    <EditText
-                        android:id="@+id/edtDataN"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="date"
-                        android:text="Name" />
-                </LinearLayout>
-
-                <LinearLayout
+                <ImageView
+                    android:id="@+id/imvPerfil"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:adjustViewBounds="false"
+                    android:cropToPadding="false"
+                    android:scaleType="center"
+                    app:srcCompat="@mipmap/ic_launcher_round" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtNome"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Nome" />
+
+                <TextView
+                    android:id="@+id/txtIdade"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Idade" />
+
+                <TextView
+                    android:id="@+id/txtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="E-mail" />
+
+                <TextView
+                    android:id="@+id/txtCurso"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Curso" />
+
+                <TextView
+                    android:id="@+id/txtSerie"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Série" />
+
+                <Button
+                    android:id="@+id/btnEditar"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="Editar" />
+
+                <Button
+                    android:id="@+id/btnLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/holo_red_dark"
+                    android:text="Sair" />
+
+                <ViewSwitcher
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:visibility="invisible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="400dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:visibility="invisible">
+
+                        <EditText
+                            android:id="@+id/edtNome"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName" />
+
+                        <EditText
+                            android:id="@+id/edtEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textEmailAddress"
+                            android:text="Name" />
+
+                        <EditText
+                            android:id="@+id/edtCurso"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:text="Name" />
+
+                        <EditText
+                            android:id="@+id/edtSerie"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:text="Name" />
+
+                        <EditText
+                            android:id="@+id/edtDataN"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="date"
+                            android:text="Name" />
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-                        <Button
-                            android:id="@+id/btnOk4"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:text="OK" />
+                            android:orientation="horizontal">
 
-                        <Button
-                            android:id="@+id/btnCancelar3"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="Cancelar" />
+                            <Button
+                                android:id="@+id/btnOk4"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="OK" />
+
+                            <Button
+                                android:id="@+id/btnCancelar3"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="Cancelar" />
+                        </LinearLayout>
+
                     </LinearLayout>
 
-                </LinearLayout>
+                </ViewSwitcher>
 
-            </ViewSwitcher>
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
-
 
 
 
 
     </LinearLayout>
+</android.support.v4.widget.DrawerLayout>
+
+
 
 
 
