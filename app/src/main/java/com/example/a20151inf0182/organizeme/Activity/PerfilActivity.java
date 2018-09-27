@@ -38,9 +38,9 @@ public class PerfilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
-        if (!getSupportActionBar().equals(null)) {
-            getSupportActionBar().hide();
-        }
+//        if (!getSupportActionBar().equals(null)) {
+//            getSupportActionBar().hide();
+//        }
         mDatabase = ConfiguracaoFirebase.getDatabaseReference();
         mAuth = ConfiguracaoFirebase.getFirebaseAuth();
         usuarioConectado = mAuth.getCurrentUser();
