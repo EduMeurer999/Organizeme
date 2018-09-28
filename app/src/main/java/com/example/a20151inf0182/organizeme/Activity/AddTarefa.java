@@ -4,6 +4,7 @@ package com.example.a20151inf0182.organizeme.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,9 @@ import android.os.Bundle;
 
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -63,6 +68,8 @@ public class AddTarefa extends AppCompatActivity {
         final EditText edtFazer = (EditText) findViewById(R.id.edtFazer);
         final EditText edtTempoEntrega = (EditText) findViewById(R.id.edtTempoEntrega);
         final EditText edtTempoPrevisto = (EditText) findViewById(R.id.edtTempoPrevisto);
+        final EditText edtPropFazer = (EditText) findViewById(R.id.edtTarefaProp);
+        final Button btnCadastrarTarefa = (Button) findViewById(R.id.btnCadastrarTarfefa);
         tvIntegrantes = (TextView) findViewById(R.id.tvIntegrantes);
 
         LayoutInflater li = getLayoutInflater();
@@ -93,14 +100,21 @@ public class AddTarefa extends AppCompatActivity {
                                             for (DataSnapshot snapshot :
                                                     dataSnapshot.getChildren()) {
                                                 if (snapshot.child("email").getValue().toString()
-                                                        .equals(edtEmail.getText().toString())) {
+                                                        .equals(edtEmail.getText().toString()) && !snapshot.child("email").getValue().toString().equals(usuario.getEmail())) {
                                                     integrantes.add(new ArrayList<String>(Arrays.asList(
                                                             edtEmail.getText().toString(),
                                                             fazer.getText().toString())));
 
                                                     atualizarTXT(integrantes);
                                                     break;
+                                                } else if (usuario.getEmail().equals(edtEmail.getText().toString())) {
+                                                    Toast.makeText(getApplicationContext(), "O proprietário já é um integrante", Toast.LENGTH_SHORT).show();
+                                                    break;
                                                 }
+                                                else{
+                                                    Toast.makeText(getApplicationContext(), "Usuário inexistente", Toast.LENGTH_SHORT).show();
+                                                }
+
                                             }
                                         }
 
@@ -137,7 +151,6 @@ public class AddTarefa extends AppCompatActivity {
 
             }
         });
-
         Button removerIntegrante = (Button) findViewById(R.id.btnDropIntegrante);
         removerIntegrante.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,59 +159,111 @@ public class AddTarefa extends AppCompatActivity {
                 atualizarTXT(integrantes);
             }
         });
+
+        btnCadastrarTarefa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String fazer = edtFazer.getText().toString();
+                String nomeTarefa = edtNomeTarefa.getText().toString();
+                String dataEntrega = edtTempoEntrega.getText().toString();
+                String dataPrevista = edtTempoPrevisto.getText().toString();
+                String subTarefaProp = edtPropFazer.getText().toString();
+                String materia = edtMateria.getText().toString();
+
+
+                if (!fazer.equals("")
+                        && !nomeTarefa.equals("")
+                        && !dataEntrega.equals("")
+                        && !dataPrevista.equals("")
+                        && !subTarefaProp.equals("")
+                        && !materia.equals("")) {
+
+                    String keyPush;
+                    DatabaseReference idTarefa = Database.child("Tarefas").push();
+                    keyPush = idTarefa.getKey().toString();
+                    tarefa.setaFazer(fazer);
+                    tarefa.setNomeTarefa(nomeTarefa);
+                    tarefa.setTempoEntrega(dataEntrega);
+                    tarefa.setTempoPrevisto(dataPrevista);
+                    tarefa.setSubTarefaProp(subTarefaProp);
+                    tarefa.setMateria(materia);
+                    tarefa.setIntegrantes(integrantes);
+
+                    Database.child("Tarefas").child(keyPush).child("fazer").setValue(tarefa.getaFazer());
+                    Database.child("Tarefas").child(keyPush).child("nome").setValue(tarefa.getNomeTarefa());
+                    Database.child("Tarefas").child(keyPush).child("tempoEntrega").setValue(tarefa.getTempoEntrega());
+                    Database.child("Tarefas").child(keyPush).child("tempoPrevisto").setValue(tarefa.getTempoPrevisto());
+                    Database.child("Tarefas").child(keyPush).child("SubTarefa Proprietario").setValue(tarefa.getSubTarefaProp());
+                    Database.child("Tarefas").child(keyPush).child("materia").setValue(tarefa.getMateria());
+                    Database.child("Tarefas").child(keyPush).child("proprietario").setValue(usuario.getEmail());
+                    DatabaseReference integrantes = Database.child("Tarefas").child(keyPush).child("integrantes");
+
+                    for (ArrayList<String> arrTemp : tarefa.getIntegrantes()) {
+                        String keyPushIntegrante;
+                        keyPushIntegrante = integrantes.push().getKey().toString();
+                        integrantes.child(keyPushIntegrante).child("email").setValue(arrTemp.get(0));
+                        integrantes.child(keyPushIntegrante).child("fazer").setValue(arrTemp.get(1));
+                    }
+                }
+
+
+            }
+        });
     }
 
     public void atualizarTXT(ArrayList<ArrayList<String>> arr) {
+        String texto = "";
         for (ArrayList<String> tmpArr : arr) {
-            tvIntegrantes.setText("" + tmpArr.get(0).toString() + "\n");
+            texto += tmpArr.get(0).toString() + "\n";
         }
+        tvIntegrantes.setText(texto);
     }
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.menu, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()){
-//            case R.id.opcPerfil:
-//                Intent i  = new Intent(this, PerfilActivity.class);
-//                i.putExtra("Usuario", usuario);
-//                startActivity(i);
-//                break;
-//            case R.id.opcAddTarefa:
-//                i = new Intent(this, AddTarefa.class);
-//                i.putExtra("Usuario", usuario);
-//                startActivity(i);
-//                break;
-//            case R.id.opcNotas:
-//                i = new Intent(this, NotasActivity.class);
-//                i.putExtra("Usuario", usuario);
-//                startActivity(i);
-//                break;
-//            case R.id.opcVerTarefas:
-//                i = new Intent(this, TarefasActivity.class);
-//                i.putExtra("Usuario", usuario);
-//                startActivity(i);
-//                break;
-//            case R.id.opcAjuda:
-//                i = new Intent(this, AjudaActivity.class);
-//                i.putExtra("Usuario", usuario);
-//                startActivity(i);
-//                break;
-//            case R.id.opcSair:
-//                mAuth.signOut();
-//                startActivity(new Intent(this, MainActivity.class));
-//                break;
-//
-//        }
-//        return super.onOptionsItemSelected(item);
-//
-//
-//
-//    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.opcPerfil:
+                Intent i = new Intent(this, PerfilActivity.class);
+                i.putExtra("Usuario", usuario);
+                startActivity(i);
+                break;
+            case R.id.opcAddTarefa:
+                i = new Intent(this, AddTarefa.class);
+                i.putExtra("Usuario", usuario);
+                startActivity(i);
+                break;
+            case R.id.opcNotas:
+                i = new Intent(this, NotasActivity.class);
+                i.putExtra("Usuario", usuario);
+                startActivity(i);
+                break;
+            case R.id.opcVerTarefas:
+                i = new Intent(this, TarefasActivity.class);
+                i.putExtra("Usuario", usuario);
+                startActivity(i);
+                break;
+            case R.id.opcAjuda:
+                i = new Intent(this, AjudaActivity.class);
+                i.putExtra("Usuario", usuario);
+                startActivity(i);
+                break;
+            case R.id.opcSair:
+                Auth.signOut();
+                startActivity(new Intent(this, MainActivity.class));
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
+
+
+    }
 
 }
 

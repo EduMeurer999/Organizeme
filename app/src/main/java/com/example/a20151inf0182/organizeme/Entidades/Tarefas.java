@@ -1,16 +1,22 @@
 package com.example.a20151inf0182.organizeme.Entidades;
 
+import java.util.ArrayList;
+
 /**
  * Created by 20151inf0182 on 27/09/2018.
  */
 
 public class Tarefas {
     private String aFazer;
+    private String nomeTarefa;
     private String materia;
     private String tempoEntrega;
     private String tempoPrevisto;
-    private Usuarios[] integrantes;
+    private ArrayList<ArrayList<String>> integrantes;
     private String proprietario;
+    private String subTarefaProp;
+
+
 
     public String getaFazer() {
         return aFazer;
@@ -44,11 +50,11 @@ public class Tarefas {
         this.tempoPrevisto = tempoPrevisto;
     }
 
-    public Usuarios[] getIntegrantes() {
+    public ArrayList<ArrayList<String>> getIntegrantes() {
         return integrantes;
     }
 
-    public void setIntegrantes(Usuarios[] integrantes) {
+    public void setIntegrantes(ArrayList<ArrayList<String>> integrantes) {
         this.integrantes = integrantes;
     }
 
@@ -58,5 +64,21 @@ public class Tarefas {
 
     public void setProprietario(String proprietario) {
         this.proprietario = proprietario;
+    }
+
+    public String getSubTarefaProp() {
+        return subTarefaProp;
+    }
+
+    public void setSubTarefaProp(String subTarefaProp) {
+        this.subTarefaProp = subTarefaProp;
+    }
+
+    public String getNomeTarefa() {
+        return nomeTarefa;
+    }
+
+    public void setNomeTarefa(String nomeTarefa) {
+        this.nomeTarefa = nomeTarefa;
     }
 }

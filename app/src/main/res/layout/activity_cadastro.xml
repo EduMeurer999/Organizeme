@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ScrollView01"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
@@ -132,14 +133,32 @@
                 android:id="@+id/txtLivre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Data de Nascimento" />
+                android:text="Tempo livre" />
 
-            <EditText
-                android:id="@+id/edtLivre"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="text" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edtLivreInicio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Início"
+                    android:inputType="text" />
+
+                <EditText
+                    android:id="@+id/edtLivreFim"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Fim"
+                    android:inputType="text" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout

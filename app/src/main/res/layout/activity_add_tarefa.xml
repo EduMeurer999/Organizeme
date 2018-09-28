@@ -73,7 +73,7 @@
                 android:id="@+id/txtFazer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="O que tem que fazer" />
+                android:text="Definição da tarefa" />
 
             <EditText
                 android:id="@+id/edtFazer"
@@ -118,6 +118,27 @@
 
             <EditText
                 android:id="@+id/edtTempoPrevisto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtTarefaProp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sub-tarefa do Proprietário" />
+
+            <EditText
+                android:id="@+id/edtTarefaProp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"

@@ -24,7 +24,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="O que ele vai fazer: "
+        android:text="Sub-tarefa do integrante: "
         android:layout_marginLeft="4dp"/>
     <EditText
         android:id="@+id/fazer"
