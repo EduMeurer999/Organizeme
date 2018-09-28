@@ -31,6 +31,9 @@ public class AjudaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajuda);
+        Intent i = getIntent();
+        usuario = (Usuarios) i.getSerializableExtra("Usuario");
+
     }
 
     @Override

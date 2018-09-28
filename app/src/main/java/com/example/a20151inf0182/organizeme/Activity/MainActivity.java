@@ -41,68 +41,74 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getSupportActionBar().hide();
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         Database = ConfiguracaoFirebase.getDatabaseReference();
         Auth = ConfiguracaoFirebase.getFirebaseAuth();
-        final Usuarios usuario = new Usuarios();
         usuarioConectado = Auth.getCurrentUser();
-        edtEmail = (EditText) findViewById(R.id.edtEmail);
-        edtSenha = (EditText) findViewById(R.id.edtSenha);
-        btnLogar = (Button) findViewById(R.id.btnLogar);
+
+        super.onCreate(savedInstanceState);
+        if (usuarioConectado != null) {
+//            Toast.makeText(getApplicationContext(), "Fazendo login", Toast.LENGTH_SHORT).show();
+            validarLogin();
+        } else {
+            setContentView(R.layout.activity_main);
+
+            final Usuarios usuario = new Usuarios();
+
+            edtEmail = (EditText) findViewById(R.id.edtEmail);
+            edtSenha = (EditText) findViewById(R.id.edtSenha);
+            btnLogar = (Button) findViewById(R.id.btnLogar);
 
 
 
-        final TextView tvTeste = (TextView) findViewById(R.id.tvTeste);
-        if (usuarioConectado != null){
-            edtEmail.setText(usuarioConectado.getEmail().toString());
-            Toast.makeText(MainActivity.this, "Por favor insira sua senha", Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(MainActivity.this, PerfilActivity.class));
 
+
+            btnLogar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!edtEmail.getText().toString().equals("") && !edtSenha.getText().toString().equals("")) {
+                        validarLogin();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Há algo errado", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+
+            TextView txtCadastro = findViewById(R.id.txtCadastro);
+
+            txtCadastro.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent telaCadastro = new Intent(MainActivity.this, CadastroActivity.class);
+                    startActivity(telaCadastro);
+                }
+            });
 
         }
-
-        btnLogar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!edtEmail.getText().toString().equals("") && !edtSenha.getText().toString().equals("")){
-                    validarLogin();
-                }else{
-                    Toast.makeText(MainActivity.this, "Há algo errado", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-
-        TextView txtCadastro = findViewById(R.id.txtCadastro);
-
-        txtCadastro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent telaCadastro = new Intent(MainActivity.this, CadastroActivity.class);
-                startActivity(telaCadastro);
-            }
-        });
-
     }
 
 
     public void validarLogin(){
         final Usuarios usuario = new Usuarios();
-        Auth.signInWithEmailAndPassword(edtEmail.getText().toString(), edtSenha.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
+
+        if(usuarioConectado == null) {
+            Auth.signInWithEmailAndPassword(edtEmail.getText().toString(), edtSenha.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         Database.child("Usuarios").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
-                                    if(snapshot.child("email").getValue().toString().equals(edtEmail.getText().toString())) {
+                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                    if (snapshot.child("email").getValue().toString().equals(edtEmail.getText().toString())) {
                                         usuario.setId((String) snapshot.getKey().toString());
                                         usuario.setEmail((String) snapshot.child("email").getValue().toString());
                                         usuario.setNome((String) snapshot.child("nome").getValue().toString());
+                                        usuario.setDataNascimento((String) snapshot.child("dataNascimento").getValue().toString());
+                                        usuario.setCurso((String) snapshot.child("curso").getValue().toString());
+                                        usuario.setSerie((String) snapshot.child("serie").getValue().toString());
                                         Intent mainToPerfil = new Intent(MainActivity.this, PerfilActivity.class);
-                                        mainToPerfil.putExtra("Usuario",usuario);
+                                        mainToPerfil.putExtra("Usuario", usuario);
                                         startActivity(mainToPerfil);
                                         Toast.makeText(MainActivity.this, "Login efetuado com sucesso", Toast.LENGTH_SHORT).show();
                                         finish();
@@ -117,11 +123,40 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
 
-                    }else{
+                    } else {
                         Toast.makeText(MainActivity.this, "Usuário inexistente ou senha incorreta", Toast.LENGTH_SHORT).show();
                     }
-            }
-        });
+                }
+            });
+        }
+        else{
+            Database.child("Usuarios").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        if (snapshot.child("email").getValue().toString().equals(usuarioConectado.getEmail().toString())) {
+                            usuario.setId((String) snapshot.getKey().toString());
+                            usuario.setEmail((String) snapshot.child("email").getValue().toString());
+                            usuario.setNome((String) snapshot.child("nome").getValue().toString());
+                            usuario.setDataNascimento((String) snapshot.child("dataNascimento").getValue().toString());
+                            usuario.setCurso((String) snapshot.child("curso").getValue().toString());
+                            usuario.setSerie((String) snapshot.child("serie").getValue().toString());
+                            Intent mainToPerfil = new Intent(MainActivity.this, PerfilActivity.class);
+                            mainToPerfil.putExtra("Usuario", usuario);
+                            startActivity(mainToPerfil);
+                            Toast.makeText(MainActivity.this, "Login efetuado com sucesso", Toast.LENGTH_SHORT).show();
+                            finish();
+                            break;
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
 
     }
 

@@ -48,9 +48,11 @@ public class CadastroActivity extends AppCompatActivity {
         final EditText edtSenha = (EditText) findViewById(R.id.edtSenha);
         final EditText edtSenhaC = (EditText) findViewById(R.id.edtSenhaC);
         final Button btnCadastrar = (Button) findViewById(R.id.btnCadastrar);
-//        EditText edtCurso = (EditText) findViewById(R.id.edtCurso);
-//        EditText edtSerie = (EditText) findViewById(R.id.edtSerie);
-//        EditText edtIdade = (EditText) findViewById(R.id.edtIdade);
+        final EditText edtCurso = (EditText) findViewById(R.id.edtCurso);
+        final EditText edtSerie = (EditText) findViewById(R.id.edtSerie);
+        final EditText edtNascimento = (EditText) findViewById(R.id.edtNascimento);
+        final EditText edtTempoLivreInicio = (EditText) findViewById(R.id.edtLivreInicio);
+        final EditText edtTempoLivreFim = (EditText) findViewById(R.id.edtLivreFim);
 
 
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
@@ -60,9 +62,11 @@ public class CadastroActivity extends AppCompatActivity {
                 String email = edtEmail.getText().toString();
                 String senha = edtSenha.getText().toString();
                 String senhaC = edtSenhaC.getText().toString();
-//        String curso = edtCurso.getText().toString();
-//        int serie = Integer.parseInt(edtSerie.getText().toString());
-//        int idade = Integer.parseInt(edtIdade.getText().toString());
+                String curso = edtCurso.getText().toString();
+                String serie = edtSerie.getText().toString();
+                String dataNascimento = edtNascimento.getText().toString();
+                String tempoLivreInicio = edtTempoLivreInicio.getText().toString();
+                String tempoLivreFim = edtTempoLivreFim.getText().toString();
 
 
                 if (!nome.equals("") && !email.equals("") &&
@@ -84,21 +88,19 @@ public class CadastroActivity extends AppCompatActivity {
                             usuarioCadastro.setNome(nome);
                             usuarioCadastro.setEmail(email);
                             usuarioCadastro.setSenha(senha);
-//                            usuarioCadastro.setCurso(curso);
-//                            usuarioCadastro.setSerie(serie);
-//                            usuarioCadastro.setIdade(idade);
+                            usuarioCadastro.setCurso(curso);
+                            usuarioCadastro.setSerie(serie);
+                            usuarioCadastro.setDataNascimento(dataNascimento);
 
 
                             DatabaseReference usuarioAtual = mDatabase.child("Usuarios").push();
                             usuarioAtual.child("nome").setValue(usuarioCadastro.getNome());
                             usuarioAtual.child("email").setValue(usuarioCadastro.getEmail());
-
-
-//                            usuarioAtual.child("curso").setValue(usuarioCadastro.getCurso());
-//                            usuarioAtual.child("serie").setValue(usuarioCadastro.getSerie());
-//                            usuarioAtual.child("idade").setValue(usuarioCadastro.getIdade());
-
-
+                            usuarioAtual.child("curso").setValue(usuarioCadastro.getCurso());
+                            usuarioAtual.child("serie").setValue(usuarioCadastro.getSerie());
+                            usuarioAtual.child("dataNascimento").setValue(usuarioCadastro.getDataNascimento());
+                            usuarioAtual.child("inicioTempoLivre").setValue(usuarioCadastro.getLivreInicio());
+                            usuarioAtual.child("fimTempoLivre").setValue(usuarioCadastro.getLivreFim());
 
                             mAuth.createUserWithEmailAndPassword(usuarioCadastro.getEmail(), usuarioCadastro.getSenha())
                                     .addOnCompleteListener(CadastroActivity.this, new OnCompleteListener<AuthResult>() {
@@ -123,25 +125,7 @@ public class CadastroActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(CadastroActivity.this, "Todos os campos devem ser preenchidos", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
-
-
     }
-//    public byte[] encriptarSenha(String senha){
-//        try {
-//            MessageDigest enc = MessageDigest.getInstance("MD5");
-//           byte messageDigest[] = enc.digest(senha.getBytes("UTF-8"));
-//            return messageDigest;
-//        } catch (NoSuchAlgorithmException e) {
-//            e.printStackTrace();
-//            return null;
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//
-//  }
-
 }

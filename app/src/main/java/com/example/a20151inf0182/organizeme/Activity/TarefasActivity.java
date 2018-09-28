@@ -27,6 +27,8 @@ public class TarefasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tarefas);
+        Intent i = getIntent();
+        usuario = (Usuarios) i.getSerializableExtra("Usuario");
     }
 
 

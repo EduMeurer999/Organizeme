@@ -52,11 +52,12 @@ public class PerfilActivity extends AppCompatActivity {
         usuarioConectado = mAuth.getCurrentUser();
 
         final TextView tvNome = (TextView) findViewById(R.id.txtNome);
-        final TextView tvIdade = (TextView) findViewById(R.id.txtIdade);
+        final TextView tvDataNasc = (TextView) findViewById(R.id.txtDataNascimento);
         final TextView tvCurso = (TextView) findViewById(R.id.txtCurso);
         final TextView tvEmail = (TextView) findViewById(R.id.txtEmail);
         final TextView tvSerie = (TextView) findViewById(R.id.txtSerie);
         final Button btnEditar = (Button) findViewById(R.id.btnEditar);
+
 
         Intent i = getIntent();
         usuario = (Usuarios) i.getSerializableExtra("Usuario");
@@ -64,6 +65,9 @@ public class PerfilActivity extends AppCompatActivity {
 
         tvNome.setText("Nome: "+usuario.getNome());
         tvEmail.setText("Email: "+usuario.getEmail());
+        tvCurso.setText("Curso: "+usuario.getCurso());
+        tvDataNasc.setText("Data Nascimento: "+ usuario.getDataNascimento());
+        tvSerie.setText("Serie/Ano: "+usuario.getSerie());
 
 
 //        Button btnLogout = (Button) findViewById(R.id.btnLogout);

@@ -14,8 +14,10 @@ public class Usuarios implements Serializable{
     private String senha;
     private String nome;
     private String curso;
-    private int idade;
-    private int serie;
+    private String dataNascimento;
+    private String serie;
+    private String livreInicio;
+    private String livreFim;
     private Tarefas tarefas;
 
 
@@ -64,19 +66,19 @@ public class Usuarios implements Serializable{
         this.curso = curso;
     }
 
-    public int getIdade() {
-        return idade;
+    public String getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
-    public int getSerie() {
+    public String getSerie() {
         return serie;
     }
 
-    public void setSerie(int serie) {
+    public void setSerie(String serie) {
         this.serie = serie;
     }
 
@@ -88,7 +90,19 @@ public class Usuarios implements Serializable{
         this.tarefas = tarefas;
     }
 
+    public String getLivreInicio() {
+        return livreInicio;
+    }
 
+    public void setLivreInicio(String livreInicio) {
+        this.livreInicio = livreInicio;
+    }
 
+    public String getLivreFim() {
+        return livreFim;
+    }
 
+    public void setLivreFim(String livreFim) {
+        this.livreFim = livreFim;
+    }
 }
