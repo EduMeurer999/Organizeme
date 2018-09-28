@@ -22,8 +22,8 @@
                 android:id="@+id/opcNotas"
                 android:title="Notas" />
             <item
-                android:id="@+id/opcTarefas"
-                android:title="Tarefas" />
+                android:id="@+id/opcVerTarefas"
+                android:title="Ver Tarefas" />
         </menu>
     </item>
 

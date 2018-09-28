@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -44,6 +45,7 @@ public class PerfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
 
+
 //
         mDatabase = ConfiguracaoFirebase.getDatabaseReference();
         mAuth = ConfiguracaoFirebase.getFirebaseAuth();
@@ -63,20 +65,15 @@ public class PerfilActivity extends AppCompatActivity {
         tvNome.setText("Nome: "+usuario.getNome());
         tvEmail.setText("Email: "+usuario.getEmail());
 
-        btnEditar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(PerfilActivity.this, AddTarefa.class));
-            }
-        });
-        Button btnLogout = (Button) findViewById(R.id.btnLogout);
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-                startActivity(new Intent(PerfilActivity.this, MainActivity.class));
-            }
-        });
+
+//        Button btnLogout = (Button) findViewById(R.id.btnLogout);
+//        btnLogout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mAuth.signOut();
+//                startActivity(new Intent(PerfilActivity.this, MainActivity.class));
+//            }
+//        });
 
 
 
@@ -92,10 +89,36 @@ public class PerfilActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.opcAddTarefa:
-                Intent i  = new Intent(PerfilActivity.this, AddTarefa.class);
-                        i.putExtra("Usuario", usuario);
+            case R.id.opcPerfil:
+                Intent i  = new Intent(this, PerfilActivity.class);
+                i.putExtra("Usuario", usuario);
                 startActivity(i);
+                break;
+            case R.id.opcAddTarefa:
+                i = new Intent(this, AddTarefa.class);
+                i.putExtra("Usuario", usuario);
+                startActivity(i);
+                break;
+            case R.id.opcNotas:
+                i = new Intent(this, NotasActivity.class);
+                i.putExtra("Usuario", usuario);
+                startActivity(i);
+                break;
+            case R.id.opcVerTarefas:
+                i = new Intent(this, TarefasActivity.class);
+                i.putExtra("Usuario", usuario);
+                startActivity(i);
+                break;
+            case R.id.opcAjuda:
+                i = new Intent(this, AjudaActivity.class);
+                i.putExtra("Usuario", usuario);
+                startActivity(i);
+                break;
+            case R.id.opcSair:
+                mAuth.signOut();
+                startActivity(new Intent(this, MainActivity.class));
+                break;
+
         }
         return super.onOptionsItemSelected(item);
 

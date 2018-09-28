@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Database = ConfiguracaoFirebase.getDatabaseReference();
@@ -49,26 +50,13 @@ public class MainActivity extends AppCompatActivity {
         edtEmail = (EditText) findViewById(R.id.edtEmail);
         edtSenha = (EditText) findViewById(R.id.edtSenha);
         btnLogar = (Button) findViewById(R.id.btnLogar);
-        btnTeste = (Button) findViewById(R.id.btnTeste);
 
 
-        btnTeste.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent perfil=new Intent(MainActivity.this, PerfilActivity.class);
-//                startActivity(perfil);
-//                finish();
-                // startActivity(new Intent(MainActivity.this, PerfilActivity.class));
-//                Toast.makeText(MainActivity.this, ""+usuario.getId(), Toast.LENGTH_SHORT).show();
-
-
-            }
-        });
 
         final TextView tvTeste = (TextView) findViewById(R.id.tvTeste);
         if (usuarioConectado != null){
             edtEmail.setText(usuarioConectado.getEmail().toString());
-            Toast.makeText(MainActivity.this, "Por favor insira sua senha novamente", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Por favor insira sua senha", Toast.LENGTH_SHORT).show();
 //            startActivity(new Intent(MainActivity.this, PerfilActivity.class));
 
 
@@ -130,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                         });
 
                     }else{
-                        Toast.makeText(MainActivity.this, "Usuário inexistente", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Usuário inexistente ou senha incorreta", Toast.LENGTH_SHORT).show();
                     }
             }
         });
