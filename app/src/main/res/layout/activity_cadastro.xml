@@ -38,7 +38,8 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:text="Nome:"
-                    android:gravity="center|end"/>
+                    android:gravity="center|end"
+                    android:layout_marginBottom="20dp"/>
 
                 <TextView
                     android:id="@+id/txtEmail"
@@ -46,7 +47,8 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:text="E-mail:"
-                    android:gravity="center|end" />
+                    android:gravity="center|end"
+                    android:layout_marginBottom="20dp"/>
 
                 <TextView
                     android:id="@+id/txtCurso"
@@ -54,7 +56,8 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:text="Curso:"
-                    android:gravity="center|end" />
+                    android:gravity="center|end"
+                    android:layout_marginBottom="20dp"/>
 
                 <TextView
                     android:id="@+id/txtSerie"
@@ -62,7 +65,8 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:text="Série:"
-                    android:gravity="center|end" />
+                    android:gravity="center|end"
+                    android:layout_marginBottom="20dp"/>
 
                 <TextView
                     android:id="@+id/txtNascimento"
@@ -78,7 +82,8 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:text="Tempo livre:"
-                    android:gravity="center|end" />
+                    android:gravity="center|end"
+                    android:layout_marginBottom="20dp"/>
 
                 <TextView
                     android:id="@+id/txtSenha"
@@ -86,7 +91,8 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:text="Senha:"
-                    android:gravity="center|end" />
+                    android:gravity="center|end"
+                    android:layout_marginBottom="20dp"/>
 
                 <TextView
                     android:id="@+id/txtConfirmaSenha"
@@ -94,7 +100,8 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:text="Confirmar senha:"
-                    android:gravity="center|end" />
+                    android:gravity="center|end"
+                    android:layout_marginBottom="20dp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -108,35 +115,40 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:layout_marginBottom="20dp"/>
 
                 <EditText
                     android:id="@+id/edtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="textEmailAddress"
+                    android:layout_marginBottom="20dp"/>
 
                 <EditText
                     android:id="@+id/edtCurso"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:layout_marginBottom="20dp"/>
 
                 <EditText
                     android:id="@+id/edtSerie"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:layout_marginBottom="20dp"/>
 
                 <EditText
                     android:id="@+id/edtNascimento"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:layout_marginBottom="20dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
