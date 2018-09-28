@@ -1,6 +1,7 @@
 package com.example.a20151inf0182.organizeme.Activity;
 
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 
 import android.support.v7.app.AlertDialog;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,15 +32,16 @@ public class AddTarefa extends AppCompatActivity {
     private FirebaseAuth Auth;
     private FirebaseUser usuarioConectado;
     private DatabaseReference Database;
-
+    private Usuarios usuario;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_tarefa);
         Database = ConfiguracaoFirebase.getDatabaseReference();
         Auth = ConfiguracaoFirebase.getFirebaseAuth();
         final AlertDialog alert;
+        usuario = (Usuarios) getIntent().getSerializableExtra("Usuario");
 
         final ArrayList<String[]> integrantes = new ArrayList<>();
         final EditText edtNomeTarefa = (EditText) findViewById(R.id.edtNomeTarefa);
@@ -58,27 +61,9 @@ public class AddTarefa extends AppCompatActivity {
                 final EditText tvFazer = new EditText(AddTarefa.this);
                 tvFazer.setText("O que irá fazer: ");
                 final EditText fazer = new EditText(AddTarefa.this);
-                final AlertDialog builder = new AlertDialog.Builder(AddTarefa.this)
-                .setTitle("Integrante")
+                onCreateDialog(savedInstanceState);
 
-                .setView(tvEmail)
 
-                .setView(email)
-
-                .setView(tvFazer)
-
-               .setView(fazer)
-
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (!email.getText().toString().equals("") && !fazer.getText().toString().equals("")) {
-                            integrantes.add(new String[]{email.getText().toString(), fazer.getText().toString()});
-                        }
-                    }
-                })
-                .create();
-                builder.show();
 
 
             }
@@ -126,6 +111,28 @@ public class AddTarefa extends AppCompatActivity {
 //        });
 
 
+    }
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(AddTarefa.this);
+        // Get the layout inflater
+        LayoutInflater inflater = AddTarefa.this.getLayoutInflater();
+
+        // Inflate and set the layout for the dialog
+        // Pass null as the parent view because its going in the dialog layout
+        builder.setView(inflater.inflate(R.layout.alert_dialog, null))
+                // Add action buttons
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        // sign in the user ...
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+        return builder.create();
     }
 
 

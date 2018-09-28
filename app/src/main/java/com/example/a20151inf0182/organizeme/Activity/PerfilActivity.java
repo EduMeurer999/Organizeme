@@ -36,9 +36,8 @@ public class PerfilActivity extends AppCompatActivity {
     private FirebaseUser usuarioConectado;
     private MainActivity login;
     private static final String TAG = "PerfilActivity";
-
-
-
+    private static final int OK_MENU_ITEM = Menu.FIRST;
+    private Usuarios usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +55,9 @@ public class PerfilActivity extends AppCompatActivity {
         final TextView tvEmail = (TextView) findViewById(R.id.txtEmail);
         final TextView tvSerie = (TextView) findViewById(R.id.txtSerie);
         final Button btnEditar = (Button) findViewById(R.id.btnEditar);
+
         Intent i = getIntent();
-        Usuarios usuario = (Usuarios) i.getSerializableExtra("Usuario");
+        usuario = (Usuarios) i.getSerializableExtra("Usuario");
 
 
         tvNome.setText("Nome: "+usuario.getNome());
@@ -91,7 +91,16 @@ public class PerfilActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.opcAddTarefa:
+                Intent i  = new Intent(PerfilActivity.this, AddTarefa.class);
+                        i.putExtra("Usuario", usuario);
+                startActivity(i);
+        }
         return super.onOptionsItemSelected(item);
+
+
+
     }
 //    public void btnEditarAction(){
 //        btnEditar.setOnClickListener(new View.OnClickListener() {
