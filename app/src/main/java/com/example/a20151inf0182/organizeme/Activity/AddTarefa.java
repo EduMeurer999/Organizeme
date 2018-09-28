@@ -153,6 +153,53 @@ public class AddTarefa extends AppCompatActivity {
             tvIntegrantes.setText("" + tmpArr.get(0).toString() + "\n");
         }
     }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()){
+//            case R.id.opcPerfil:
+//                Intent i  = new Intent(this, PerfilActivity.class);
+//                i.putExtra("Usuario", usuario);
+//                startActivity(i);
+//                break;
+//            case R.id.opcAddTarefa:
+//                i = new Intent(this, AddTarefa.class);
+//                i.putExtra("Usuario", usuario);
+//                startActivity(i);
+//                break;
+//            case R.id.opcNotas:
+//                i = new Intent(this, NotasActivity.class);
+//                i.putExtra("Usuario", usuario);
+//                startActivity(i);
+//                break;
+//            case R.id.opcVerTarefas:
+//                i = new Intent(this, TarefasActivity.class);
+//                i.putExtra("Usuario", usuario);
+//                startActivity(i);
+//                break;
+//            case R.id.opcAjuda:
+//                i = new Intent(this, AjudaActivity.class);
+//                i.putExtra("Usuario", usuario);
+//                startActivity(i);
+//                break;
+//            case R.id.opcSair:
+//                mAuth.signOut();
+//                startActivity(new Intent(this, MainActivity.class));
+//                break;
+//
+//        }
+//        return super.onOptionsItemSelected(item);
+//
+//
+//
+//    }
+
 }
 
 

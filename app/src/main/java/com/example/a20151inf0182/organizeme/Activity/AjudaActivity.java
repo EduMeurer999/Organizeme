@@ -1,6 +1,7 @@
 package com.example.a20151inf0182.organizeme.Activity;
 
 
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,15 +21,16 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 
-public class tarefaActivity extends AppCompatActivity {
+
+public class AjudaActivity extends AppCompatActivity {
 
     private Usuarios usuario;
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tarefa);
-        //teste
+        setContentView(R.layout.activity_ajuda);
     }
 
     @Override

@@ -28,6 +28,8 @@
         <activity android:name=".Activity.AddTarefa" />
         <activity android:name=".Activity.NotasActivity" />
         <activity android:name=".Activity.tarefaActivity" />
+        <activity android:name=".Activity.TarefasActivity" />
+        <activity android:name=".Activity.AjudaActivity"></activity>
     </application>
 
 </manifest>
