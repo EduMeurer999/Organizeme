@@ -47,15 +47,16 @@ public class tarefaActivity extends AppCompatActivity {
                 String pesquisa = sTarefa.replace(" ", "+");
                 Uri uriUrl = Uri.parse("https://scholar.google.com.br/scholar?hl=pt-BR&as_sdt=0%2C5&q="+pesquisa+"&oq=");
                 Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
 
                 TextView txtDefinicao = (TextView)findViewById(R.id.txtDefinicao);
                 String sDefinicao=String.valueOf(txtDefinicao.getText().toString());
-                String var1 = sDefinicao.substring(21,sDefinicao.length());
+                //bota 21 depois para tira ro espaço inicial
+                String var1 = sDefinicao.substring(20,sDefinicao.length());
                 String pesquisa2 = var1.replace(" ", "+");
                 Uri uriUrl2 = Uri.parse("https://scholar.google.com.br/scholar?hl=pt-BR&as_sdt=0%2C5&q="+pesquisa2+"&oq=");
                 Intent launchBrowser2 = new Intent(Intent.ACTION_VIEW, uriUrl2);
                 startActivity(launchBrowser2);
+                startActivity(launchBrowser);
             }
         });
     }

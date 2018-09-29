@@ -126,7 +126,7 @@ public class PerfilActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.opcPerfil:
-                Intent i  = new Intent(this, PerfilActivity.class);
+                Intent i  = new Intent(this, tarefaActivity.class);
                 i.putExtra("Usuario", usuario);
                 startActivity(i);
                 break;
