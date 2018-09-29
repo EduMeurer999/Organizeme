@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Tela de ajuda aqui" />
+            android:text="  Colocar descrição de todos os modulos aqui." />
 
     </LinearLayout>
 </ScrollView>
