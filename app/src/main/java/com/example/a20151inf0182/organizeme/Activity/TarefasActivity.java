@@ -1,13 +1,21 @@
 package com.example.a20151inf0182.organizeme.Activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 
+import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 
 
 import com.example.a20151inf0182.organizeme.DAO.ConfiguracaoFirebase;
@@ -29,8 +37,26 @@ public class TarefasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tarefas);
         Intent i = getIntent();
         usuario = (Usuarios) i.getSerializableExtra("Usuario");
-    }
 
+//list view ou details
+        ListView listview = (ListView) findViewById(R.id.listview);
+        String[] dados = new String[] { "Cupcake", "Donut", "Eclair", "Froyo", "Gingerbread",
+                "Honeycomb", "Ice Cream Sandwich", "Jelly Bean",
+                "KitKat", "Lollipop", "Marshmallow", "Nougat" };
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dados);
+        listview.setAdapter(adapter);
+
+//barra de progresso
+        Resources res = getResources();
+        Drawable drawable = res.getDrawable(R.drawable.background);
+        ProgressBar mProgress = (ProgressBar) findViewById(R.id.progressbar1);
+        mProgress.setProgress(75);   // Main Progress
+//        mProgress.setSecondaryProgress(50); // Secondary Progress
+        mProgress.setMax(100); // Maximum Progress
+        mProgress.setProgressDrawable(drawable);
+
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
