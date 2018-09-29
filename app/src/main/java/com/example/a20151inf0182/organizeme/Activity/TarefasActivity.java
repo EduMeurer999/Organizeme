@@ -38,14 +38,6 @@ public class TarefasActivity extends AppCompatActivity {
         Intent i = getIntent();
         usuario = (Usuarios) i.getSerializableExtra("Usuario");
 
-//list view ou details
-        ListView listview = (ListView) findViewById(R.id.listview);
-        String[] dados = new String[] { "Cupcake", "Donut", "Eclair", "Froyo", "Gingerbread",
-                "Honeycomb", "Ice Cream Sandwich", "Jelly Bean",
-                "KitKat", "Lollipop", "Marshmallow", "Nougat" };
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dados);
-        listview.setAdapter(adapter);
-
 //barra de progresso
         Resources res = getResources();
         Drawable drawable = res.getDrawable(R.drawable.background);
