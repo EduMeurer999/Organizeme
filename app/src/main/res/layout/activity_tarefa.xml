@@ -19,39 +19,51 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtMateria"
+                android:id="@+id/txtNomeTarefa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tarefa X"
+                android:text="Nome da Tarefa"
                 android:textSize="24sp" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="20dp"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"></LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtMateria"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="5dp">
+                    android:text="Materia:" />
 
-                    <TextView
-                        android:id="@+id/txtTarefa"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Tarefa X:" />
+                <TextView
+                    android:id="@+id/txtDefinicao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Definição da tarefa:" />
 
-                    <TextView
-                        android:id="@+id/txtNota"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Aguardando nota" />
+                <TextView
+                    android:id="@+id/txtTempoEntrega"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dia da entrega" />
 
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/txtTempoPrevisto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dia previsto" />
 
+                <TextView
+                    android:id="@+id/txtFazer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="O que tem que fazer:" />
             </LinearLayout>
 
 
