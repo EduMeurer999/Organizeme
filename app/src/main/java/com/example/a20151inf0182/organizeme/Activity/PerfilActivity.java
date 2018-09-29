@@ -1,20 +1,25 @@
 package com.example.a20151inf0182.organizeme.Activity;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
@@ -68,7 +73,34 @@ public class PerfilActivity extends AppCompatActivity {
         tvCurso.setText("Curso: "+usuario.getCurso());
         tvDataNasc.setText("Data Nascimento: "+ usuario.getDataNascimento());
         tvSerie.setText("Serie/Ano: "+usuario.getSerie());
+        btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                LayoutInflater li = getLayoutInflater();
+//                View view = li.inflate(R.layout.editar_layout, null);
 
+                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                builder.setCancelable(false);
+                builder.setTitle("Atualiza suas informações!");
+                builder.setView(R.layout.alert_dialog);
+
+//                builder.setPositiveButton("Atualizar", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        final EditText emailAtualizar = (EditText) ((Dialog) dialog).findViewById(R.id.emailAtualizar);
+//                        final EditText cursoAtualizar = (EditText) ((Dialog) dialog).findViewById(R.id.edtCursoAtualizar);
+//                        final EditText dataNascAtualizar = (EditText) ((Dialog) dialog).findViewById(R.id.edtDataNatualizar);
+//                        final EditText serieAtualizar = (EditText) ((Dialog) dialog).findViewById(R.id.edtSerieAtualizar);
+//                        final EditText nomeAtualizar = (EditText) ((Dialog) dialog).findViewById(R.id.edtNomeAtualizar);
+//
+////                        String emailA = emailAtualizar.getText().toString();
+////                        String cursoA = emailAtualizar.getText().toString();
+////                        String emailA = emailAtualizar.getText().toString();
+//
+//                    }
+//                });
+            }
+        });
 
 //        Button btnLogout = (Button) findViewById(R.id.btnLogout);
 //        btnLogout.setOnClickListener(new View.OnClickListener() {

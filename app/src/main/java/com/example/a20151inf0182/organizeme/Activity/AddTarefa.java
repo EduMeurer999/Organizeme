@@ -48,8 +48,6 @@ public class AddTarefa extends AppCompatActivity {
     private DatabaseReference Database;
     private Usuarios usuario;
     private Tarefas tarefa;
-    EditText input;
-    EditText input2;
     TextView tvIntegrantes;
 
     @Override
@@ -62,7 +60,7 @@ public class AddTarefa extends AppCompatActivity {
         usuario = (Usuarios) getIntent().getSerializableExtra("Usuario");
         tarefa = new Tarefas();
 
-        final ArrayList<ArrayList<String>> integrantes = new ArrayList<>();
+        final ArrayList<String[]> integrantes = new ArrayList<>();
         final EditText edtNomeTarefa = (EditText) findViewById(R.id.edtNomeTarefa);
         final EditText edtMateria = (EditText) findViewById(R.id.edtMateria);
         final EditText edtFazer = (EditText) findViewById(R.id.edtFazer);
@@ -97,24 +95,30 @@ public class AddTarefa extends AppCompatActivity {
                                     new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            boolean existe = false;
                                             for (DataSnapshot snapshot :
                                                     dataSnapshot.getChildren()) {
                                                 if (snapshot.child("email").getValue().toString()
                                                         .equals(edtEmail.getText().toString()) && !snapshot.child("email").getValue().toString().equals(usuario.getEmail())) {
-                                                    integrantes.add(new ArrayList<String>(Arrays.asList(
+                                                    integrantes.add(new String[]{
                                                             edtEmail.getText().toString(),
-                                                            fazer.getText().toString())));
+                                                            fazer.getText().toString()});
+                                                    existe = true;
 
                                                     atualizarTXT(integrantes);
                                                     break;
                                                 } else if (usuario.getEmail().equals(edtEmail.getText().toString())) {
                                                     Toast.makeText(getApplicationContext(), "O proprietário já é um integrante", Toast.LENGTH_SHORT).show();
+                                                    existe = true;
                                                     break;
                                                 }
-                                                else{
-                                                    Toast.makeText(getApplicationContext(), "Usuário inexistente", Toast.LENGTH_SHORT).show();
+                                                else if(!snapshot.getValue().toString().equals(edtEmail.getText().toString())){
+                                                    existe= false;
                                                 }
 
+                                            }
+                                            if(!existe){
+                                                Toast.makeText(getApplicationContext(), "Usuário Inexistente", Toast.LENGTH_SHORT).show();
                                             }
                                         }
 
@@ -177,6 +181,7 @@ public class AddTarefa extends AppCompatActivity {
                         && !dataPrevista.equals("")
                         && !subTarefaProp.equals("")
                         && !materia.equals("")) {
+                    String status = "Em andamento";
 
                     String keyPush;
                     DatabaseReference idTarefa = Database.child("Tarefas").push();
@@ -196,14 +201,25 @@ public class AddTarefa extends AppCompatActivity {
                     Database.child("Tarefas").child(keyPush).child("SubTarefa Proprietario").setValue(tarefa.getSubTarefaProp());
                     Database.child("Tarefas").child(keyPush).child("materia").setValue(tarefa.getMateria());
                     Database.child("Tarefas").child(keyPush).child("proprietario").setValue(usuario.getEmail());
+                    Database.child("Tarefas").child(keyPush).child("status").setValue(status);
                     DatabaseReference integrantes = Database.child("Tarefas").child(keyPush).child("integrantes");
 
-                    for (ArrayList<String> arrTemp : tarefa.getIntegrantes()) {
+                    for (String[] arrTemp : tarefa.getIntegrantes()) {
                         String keyPushIntegrante;
                         keyPushIntegrante = integrantes.push().getKey().toString();
-                        integrantes.child(keyPushIntegrante).child("email").setValue(arrTemp.get(0));
-                        integrantes.child(keyPushIntegrante).child("fazer").setValue(arrTemp.get(1));
+
+                        integrantes.child(keyPushIntegrante).child("email").setValue(arrTemp[0]);
+                        integrantes.child(keyPushIntegrante).child("fazer").setValue(arrTemp[1]);
                     }
+                    Toast.makeText(getApplicationContext(), "Tarefa cadastrada com sucesso!", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(getApplicationContext(), TarefasActivity.class);
+                    i.putExtra("Usuario",usuario);
+                    startActivity(i);
+                    finish();
+
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Todos campos devem ser preenchidos", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -211,10 +227,10 @@ public class AddTarefa extends AppCompatActivity {
         });
     }
 
-    public void atualizarTXT(ArrayList<ArrayList<String>> arr) {
+    public void atualizarTXT(ArrayList<String[]> arr) {
         String texto = "";
-        for (ArrayList<String> tmpArr : arr) {
-            texto += tmpArr.get(0).toString() + "\n";
+        for (String[] tmpArr : arr) {
+            texto += tmpArr[0].toString() + "\n";
         }
         tvIntegrantes.setText(texto);
     }

@@ -1,20 +1,22 @@
 package com.example.a20151inf0182.organizeme.Entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by 20151inf0182 on 27/09/2018.
  */
 
-public class Tarefas {
+public class Tarefas implements Serializable{
     private String aFazer;
     private String nomeTarefa;
     private String materia;
     private String tempoEntrega;
     private String tempoPrevisto;
-    private ArrayList<ArrayList<String>> integrantes;
+    private ArrayList<String[]> integrantes;
     private String proprietario;
     private String subTarefaProp;
+    private String status;
 
 
 
@@ -50,11 +52,11 @@ public class Tarefas {
         this.tempoPrevisto = tempoPrevisto;
     }
 
-    public ArrayList<ArrayList<String>> getIntegrantes() {
+    public ArrayList<String[]> getIntegrantes() {
         return integrantes;
     }
 
-    public void setIntegrantes(ArrayList<ArrayList<String>> integrantes) {
+    public void setIntegrantes(ArrayList<String[]> integrantes) {
         this.integrantes = integrantes;
     }
 
@@ -80,5 +82,28 @@ public class Tarefas {
 
     public void setNomeTarefa(String nomeTarefa) {
         this.nomeTarefa = nomeTarefa;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Tarefas{" +
+                "aFazer='" + aFazer + '\'' +
+                ", nomeTarefa='" + nomeTarefa + '\'' +
+                ", materia='" + materia + '\'' +
+                ", tempoEntrega='" + tempoEntrega + '\'' +
+                ", tempoPrevisto='" + tempoPrevisto + '\'' +
+                ", integrantes=" + integrantes +
+                ", proprietario='" + proprietario + '\'' +
+                ", subTarefaProp='" + subTarefaProp + '\'' +
+                ", status='" + status + '\'' +
+                '}';
     }
 }
