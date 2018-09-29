@@ -1,7 +1,9 @@
 package com.example.a20151inf0182.organizeme.Activity;
 
 
+import android.app.SearchManager;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -9,6 +11,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.a20151inf0182.organizeme.DAO.ConfiguracaoFirebase;
@@ -22,6 +28,7 @@ import java.util.ArrayList;
 
 public class tarefaActivity extends AppCompatActivity {
 
+    private Button btnArtigos;
     private Usuarios usuario;
     private FirebaseAuth mAuth;
     @Override
@@ -31,8 +38,32 @@ public class tarefaActivity extends AppCompatActivity {
         Intent i = getIntent();
         usuario = (Usuarios) i.getSerializableExtra("Usuario");
         //teste
+        btnArtigos = (Button) findViewById(R.id.btnArtigos);
+        btnArtigos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView txtTarefa = (TextView)findViewById(R.id.txtNomeTarefa);
+                String sTarefa=String.valueOf(txtTarefa.getText().toString());
+                String pesquisa = sTarefa.replace(" ", "+");
+                Uri uriUrl = Uri.parse("https://scholar.google.com.br/scholar?hl=pt-BR&as_sdt=0%2C5&q="+pesquisa+"&oq=");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
+
+                TextView txtDefinicao = (TextView)findViewById(R.id.txtDefinicao);
+                String sDefinicao=String.valueOf(txtDefinicao.getText().toString());
+                String var1 = sDefinicao.substring(21,sDefinicao.length());
+                String pesquisa2 = var1.replace(" ", "+");
+                Uri uriUrl2 = Uri.parse("https://scholar.google.com.br/scholar?hl=pt-BR&as_sdt=0%2C5&q="+pesquisa2+"&oq=");
+                Intent launchBrowser2 = new Intent(Intent.ACTION_VIEW, uriUrl2);
+                startActivity(launchBrowser2);
+            }
+        });
     }
 
+
+    
+    
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
