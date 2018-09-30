@@ -249,30 +249,36 @@ public class AddTarefa extends AppCompatActivity {
                 Intent i = new Intent(this, PerfilActivity.class);
                 i.putExtra("Usuario", usuario);
                 startActivity(i);
+                finish();
                 break;
             case R.id.opcAddTarefa:
                 i = new Intent(this, AddTarefa.class);
                 i.putExtra("Usuario", usuario);
                 startActivity(i);
+                finish();
                 break;
             case R.id.opcNotas:
                 i = new Intent(this, NotasActivity.class);
                 i.putExtra("Usuario", usuario);
                 startActivity(i);
+                finish();
                 break;
             case R.id.opcVerTarefas:
                 i = new Intent(this, TarefasActivity.class);
                 i.putExtra("Usuario", usuario);
                 startActivity(i);
+                finish();
                 break;
             case R.id.opcAjuda:
                 i = new Intent(this, AjudaActivity.class);
                 i.putExtra("Usuario", usuario);
                 startActivity(i);
+                finish();
                 break;
             case R.id.opcSair:
                 Auth.signOut();
                 startActivity(new Intent(this, MainActivity.class));
+                finish();
                 break;
 
         }
