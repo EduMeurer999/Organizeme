@@ -14,11 +14,93 @@
         tools:context="com.example.a20151inf0182.organizeme.Activity.AjudaActivity">
 
         <TextView
-            android:id="@+id/textView"
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="79dp"
+        android:gravity="center"
+        android:text="Ajuda"
+        android:textSize="24sp" />
+
+
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="  Colocar descrição de todos os modulos aqui." />
+            android:text="            Nesta tela você descobrirá um pouco mais sobre o aplicativo e suas funcionalidades."
+            android:paddingBottom="20dp"/>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cadastrar-se\n
+            Acesse o menu principal, clique em NÃO É CADASTRADO? CLIQUE AQUI, preencha seus dados e clique em CADASTRAR."
+            android:paddingBottom="20dp"/>
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Realizar o Login\n
+            Na tela principal, preencha os campos de e-mail e senha. Para realizar o login é necessário estar conectado a Internet."
+            android:paddingBottom="20dp"/>
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Navegação\n
+            Existe um menu no aplicativo na parte superior, onde o usuário pode navegar de página em página."
+            android:paddingBottom="20dp"/>
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Criar tarefa\n
+            Para criar uma tarefa basta realizar o login e acessar o MENU > ADICIONAR TAREFA. Irá aparecer uma tela com as informações necessárias para o cadastro de tarefas, incluindo a opção de adicionar um outro integrante."
+            android:paddingBottom="20dp"/>
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Gerenciar informações pessoais\n
+            Acesse o MENU > PERFIL e clique em editar. preencha os campos com os dados novos e clique em CONFIRMAR."
+            android:paddingBottom="20dp"/>
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Verificar minhas tarefas\n
+            Vá em MENU > TAREFAS > VER TAREFAS, todas as tarefas que você é o propietário ou integrante aparecerão."
+            android:paddingBottom="20dp" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Gerenciar uma tarefa\n
+            Acesse MENU > TAREFAS > VER TAREFAS > clique na tarefa desejada, aqui além de ver informações completas sobre a tarefa, você pode finalizá-la (FINALIZAR), editá-la (EDITAR) e buscar artigos científicos relacionados a mesma(ARTIGOS)."
+            android:paddingBottom="20dp"/>
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Logout\n
+            Para sair da conta atual basta acessar MENU > SAIR para realizar o Logout."
+            android:paddingBottom="20dp"/>
 
     </LinearLayout>
 </ScrollView>

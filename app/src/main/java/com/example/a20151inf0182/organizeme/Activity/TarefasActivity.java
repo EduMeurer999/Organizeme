@@ -166,8 +166,7 @@ public class TarefasActivity extends AppCompatActivity {
                     TextView valueTV = new TextView(TarefasActivity.this);
                     valueTV.setText("Tarefa "+tarefaTemp.getNomeTarefa());
                     valueTV.setTextSize(Float.parseFloat("18"));
-                    //id pra tarefa (5 esta só para teste) faz aqui entao
-                    //faz por aqui
+                    //id pra tarefa (5 esta só para teste)
 //        valueTV.setId(5);
                     valueTV.setLayoutParams(new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.MATCH_PARENT,
@@ -204,9 +203,6 @@ public class TarefasActivity extends AppCompatActivity {
                             LinearLayout.LayoutParams.WRAP_CONTENT));
 
 
-
-
-
                     //add no layout das tarefas
                     ((LinearLayout) layoutTarefas).addView(layoutOutraTarefa);
                     ((LinearLayout) layoutOutraTarefa).addView(valueTV);
@@ -223,6 +219,7 @@ public class TarefasActivity extends AppCompatActivity {
                         }
                     });
                 }
+
 
             }
 
