@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cadastrar-se
+            android:text="Cadastrar-se\n
             Acesse o menu principal, clique em NÃO É CADASTRADO? CLIQUE AQUI, preencha seus dados e clique em CADASTRAR."
             android:paddingBottom="20dp"/>
 
@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Realizar o Login
+            android:text="Realizar o Login\n
             Na tela principal, preencha os campos de e-mail e senha. Para realizar o login é necessário estar conectado a Internet."
             android:paddingBottom="20dp"/>
 
@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Navegação
+            android:text="Navegação\n
             Existe um menu no aplicativo na parte superior, onde o usuário pode navegar de página em página."
             android:paddingBottom="20dp"/>
 
@@ -62,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Criar tarefa
+            android:text="Criar tarefa\n
             Para criar uma tarefa basta realizar o login e acessar o MENU > ADICIONAR TAREFA. Irá aparecer uma tela com as informações necessárias para o cadastro de tarefas, incluindo a opção de adicionar um outro integrante."
             android:paddingBottom="20dp"/>
 
@@ -71,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Gerenciar informações pessoais
+            android:text="Gerenciar informações pessoais\n
             Acesse o MENU > PERFIL e clique em editar. preencha os campos com os dados novos e clique em CONFIRMAR."
             android:paddingBottom="20dp"/>
 
@@ -80,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Verificar minhas tarefas
+            android:text="Verificar minhas tarefas\n
             Vá em MENU > TAREFAS > VER TAREFAS, todas as tarefas que você é o propietário ou integrante aparecerão."
             android:paddingBottom="20dp" />
 
@@ -89,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Gerenciar uma tarefa
+            android:text="Gerenciar uma tarefa\n
             Acesse MENU > TAREFAS > VER TAREFAS > clique na tarefa desejada, aqui além de ver informações completas sobre a tarefa, você pode finalizá-la (FINALIZAR), editá-la (EDITAR) e buscar artigos científicos relacionados a mesma(ARTIGOS)."
             android:paddingBottom="20dp"/>
 
@@ -98,8 +98,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Logout
-            Para sair basta acessar MENU > SAIR e realizará o Logout."
+            android:text="Logout\n
+            Para sair da conta atual basta acessar MENU > SAIR para realizar o Logout."
             android:paddingBottom="20dp"/>
 
     </LinearLayout>

@@ -117,55 +117,22 @@ public class TarefasActivity extends AppCompatActivity {
                 for (int x = 0; x< tempTarefas.size(); x++) {
                     Tarefas tarefaTemp = new Tarefas();
                     tarefaTemp = tempTarefas.get(x);
-//
-//
-// TextView tvTarefa = (TextView) findViewById(R.id.tvNomeTarefa);
-//            TextView tvTempoRestante = (TextView) findViewById(R.id.txtTempoRes);
-//            TextView tvFazer = (TextView) findViewById(R.id.txtFazer);
-
-//            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-//            df.setLenient(false);
-//            Date d1 = null;
-//            try {
-//                d1 = df.parse(arrTemp.getTempoEntrega().toString());
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//                Toast.makeText(getApplicationContext(), "A data de entrega da tarefa é inválida", Toast.LENGTH_SHORT).show();
-//            }
-//            Date d2 = null;
-//            try {
-//                Date dataAtual = new Date();
-//                SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
-//                d2 = df.parse(formatador.format(dataAtual));
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
-//            long dt = (d2.getTime() - d1.getTime()) + 3600000;
-
-//            tvTarefa.setText("Tarefa: "+arrTemp.getNomeTarefa());
-//            tvFazer.setText("Definição da tarefa: "+arrTemp.getaFazer());
-//            tvFazer.setText("Tempo Restante: "+dt);
-
-
-                    //pega o layout em que vao tds as tarefas
-
-                    //LinearLayout layout = (LinearLayout) findViewById(R.id.info);
-
 
                     //cria um novo layout
-                    LinearLayout layoutOutraTarefa = new LinearLayout(TarefasActivity.this);
+                    final LinearLayout layoutOutraTarefa = new LinearLayout(TarefasActivity.this);
                     layoutOutraTarefa.setOrientation(LinearLayout.VERTICAL);
                     layoutOutraTarefa.setPadding(0, 50, 0, 0);
                     // setar o id do layout onlick abrir a tela de tarefa
                     // layoutOutraTarefa.setId("nomeDaTarefaAqui");
+                    layoutOutraTarefa.setId(x);
                     layoutOutraTarefa.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
                     //cria um novo TextView nome da tarefa
-                    TextView valueTV = new TextView(TarefasActivity.this);
+                    final TextView valueTV = new TextView(TarefasActivity.this);
                     valueTV.setText("Tarefa "+tarefaTemp.getNomeTarefa());
                     valueTV.setTextSize(Float.parseFloat("18"));
                     //id pra tarefa (5 esta só para teste)
-//        valueTV.setId(5);
+                    valueTV.setId(x);
                     valueTV.setLayoutParams(new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.MATCH_PARENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -208,7 +175,23 @@ public class TarefasActivity extends AppCompatActivity {
                     ((LinearLayout) layoutOutraTarefa).addView(txtTempoRestante);
                     ((LinearLayout) layoutOutraTarefa).addView(txtFazer);
 
+
+                    final int finalX = x;
+                    layoutOutraTarefa.setOnClickListener(new View.OnClickListener() {
+                        int idLayout =layoutOutraTarefa.getId();
+                        int idNomeTarefa = valueTV.getId();
+                        @Override
+                        public void onClick(View v) {
+                            if(idLayout == finalX && idNomeTarefa == finalX){
+                                Tarefas tarefaTemp2 = new Tarefas();
+                                tarefaTemp2 = tempTarefas.get(finalX);
+                                String nomeTarefa = tarefaTemp2.getNomeTarefa();
+                                Toast.makeText(TarefasActivity.this, "Tarefa: "+nomeTarefa+" \nid: "+finalX, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
+
 
             }
 
