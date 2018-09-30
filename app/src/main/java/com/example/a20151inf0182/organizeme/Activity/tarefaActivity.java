@@ -43,7 +43,7 @@ public class tarefaActivity extends AppCompatActivity {
         final TextView txtDiaPrevisto = (TextView) findViewById(R.id.txtTempoPrevisto);
         final TextView txtMateria = (TextView) findViewById(R.id.txtMateria);
         final Button btnArtigos = (Button) findViewById(R.id.btnArtigos);
-        final Button btnEditar = (Button) findViewById(R.id.btnEditar);
+        final Button btnEditar = (Button) findViewById(R.id.btnEditarTarefa);
         final Button btnFinalizar = (Button) findViewById(R.id.btnFinalizar);
 
         tarefa = (Tarefas) i.getSerializableExtra("tarefa");
@@ -55,7 +55,15 @@ public class tarefaActivity extends AppCompatActivity {
         txtDiaPrevisto.setText("Data Prevista: "+tarefa.getTempoPrevisto());
 
 
-
+        btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(tarefaActivity.this, EditarTarefaActivity.class);
+                i.putExtra("usuario", usuario);
+                i.putExtra("tarefa", tarefa);
+                startActivity(i);
+            }
+        });
 
         btnArtigos.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -12,7 +12,7 @@
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="20dp"
-        tools:context="com.example.a20151inf0182.organizeme.Activity.TarefaEditar">
+        tools:context="com.example.a20151inf0182.organizeme.Activity.EditarTarefaActivity">
 
         <TextView
             android:id="@+id/textView2"
@@ -126,6 +126,27 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layoutIntegrante"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtTarefaIntegrante"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sua sub-tarefa" />
+
+            <EditText
+                android:id="@+id/edtTarefaIntegrante"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutProp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -135,7 +156,7 @@
                 android:id="@+id/txtTarefaProp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sub-tarefa do Proprietário" />
+                android:text="Sua sub-tarefa" />
 
             <EditText
                 android:id="@+id/edtTarefaProp"

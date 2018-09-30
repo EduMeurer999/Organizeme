@@ -102,7 +102,8 @@ public class AddTarefa extends AppCompatActivity {
                                                         .equals(edtEmail.getText().toString()) && !snapshot.child("email").getValue().toString().equals(usuario.getEmail())) {
                                                     integrantes.add(new String[]{
                                                             edtEmail.getText().toString(),
-                                                            fazer.getText().toString()});
+                                                            fazer.getText().toString(),
+                                                            snapshot.getKey().toString()});
                                                     existe = true;
 
                                                     atualizarTXT(integrantes);
@@ -186,6 +187,7 @@ public class AddTarefa extends AppCompatActivity {
                     String keyPush;
                     DatabaseReference idTarefa = Database.child("Tarefas").push();
                     keyPush = idTarefa.getKey().toString();
+                    tarefa.setIdTarefa(keyPush);
                     tarefa.setaFazer(fazer);
                     tarefa.setNomeTarefa(nomeTarefa);
                     tarefa.setTempoEntrega(dataEntrega);

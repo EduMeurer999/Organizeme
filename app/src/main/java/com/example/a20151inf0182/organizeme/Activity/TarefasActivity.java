@@ -55,7 +55,7 @@ public class TarefasActivity extends AppCompatActivity {
     @SuppressLint("ResourceType")
     private DatabaseReference mDatabase;
     private LinearLayout layoutPrincipal;
-    public ArrayList<Tarefas> tarefas;
+
 
 
 
@@ -77,9 +77,11 @@ public class TarefasActivity extends AppCompatActivity {
                     for (DataSnapshot integrante : snapshot.child("integrantes").getChildren()) {
                         integrantes.add(new String[]{
 
-                                        integrante.getKey().toString(),
+
                                         integrante.child("email").getValue().toString(),
-                                        integrante.child("fazer").getValue().toString()
+                                        integrante.child("fazer").getValue().toString(),
+                                integrante.getKey().toString()
+
 
                                 }
 
@@ -87,7 +89,7 @@ public class TarefasActivity extends AppCompatActivity {
                     }
                     boolean usuarioVinculado = false;
                     for (String[] teste : integrantes) {
-                        if (teste[1].equals(usuario.getEmail())) {
+                        if (teste[0].equals(usuario.getEmail())) {
                             usuarioVinculado = true;
                             break;
                         } else {
@@ -239,13 +241,7 @@ public class TarefasActivity extends AppCompatActivity {
 
     }
 
-    public ArrayList<Tarefas> getTarefas() {
-        return tarefas;
-    }
 
-    public void setTarefas(ArrayList<Tarefas> tarefas) {
-        this.tarefas = tarefas;
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

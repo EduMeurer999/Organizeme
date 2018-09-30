@@ -17,8 +17,16 @@ public class Tarefas implements Serializable{
     private String proprietario;
     private String subTarefaProp;
     private String status;
+    private String idTarefa;
 
 
+    public String getIdTarefa() {
+        return idTarefa;
+    }
+
+    public void setIdTarefa(String idTarefa) {
+        this.idTarefa = idTarefa;
+    }
 
     public String getaFazer() {
         return aFazer;
