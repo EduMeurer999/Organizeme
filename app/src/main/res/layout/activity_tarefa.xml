@@ -37,12 +37,6 @@
                     android:text="Materia:" />
 
                 <TextView
-                    android:id="@+id/txtDefinicao"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Definição da tarefa:" />
-
-                <TextView
                     android:id="@+id/txtTempoEntrega"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
