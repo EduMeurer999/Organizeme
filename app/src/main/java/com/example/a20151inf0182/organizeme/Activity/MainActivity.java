@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         if (usuarioConectado != null) {
-//            Toast.makeText(getApplicationContext(), "Fazendo login", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Fazendo login", Toast.LENGTH_SHORT).show();
             validarLogin();
         } else {
             setContentView(R.layout.activity_main);

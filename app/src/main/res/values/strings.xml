@@ -9,4 +9,5 @@
     <string name="title_activity_teste">TesteActivity</string>
     <string name="title_activity_apague">ApagueActivity</string>
     <string name="title_activity_apagar">ApagarActivity</string>
+
 </resources>

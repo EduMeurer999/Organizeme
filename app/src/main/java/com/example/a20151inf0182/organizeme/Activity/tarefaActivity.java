@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 
 import com.example.a20151inf0182.organizeme.DAO.ConfiguracaoFirebase;
+import com.example.a20151inf0182.organizeme.Entidades.Tarefas;
 import com.example.a20151inf0182.organizeme.Entidades.Usuarios;
 import com.example.a20151inf0182.organizeme.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,36 +29,54 @@ import java.util.ArrayList;
 
 public class tarefaActivity extends AppCompatActivity {
 
-    private Button btnArtigos;
     private Usuarios usuario;
     private FirebaseAuth mAuth;
+    private Tarefas tarefa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tarefa);
         Intent i = getIntent();
+        final TextView txtTarefa = (TextView)findViewById(R.id.txtNomeTarefa);
+        final TextView txtDefinicao = (TextView)findViewById(R.id.txtDefinicao);
+        final TextView txtDiaEntrega = (TextView) findViewById(R.id.txtTempoEntrega);
+        final TextView txtDiaPrevisto = (TextView) findViewById(R.id.txtTempoPrevisto);
+        final TextView txtMateria = (TextView) findViewById(R.id.txtMateria);
+        final Button btnArtigos = (Button) findViewById(R.id.btnArtigos);
+        final Button btnEditar = (Button) findViewById(R.id.btnEditar);
+        final Button btnFinalizar = (Button) findViewById(R.id.btnFinalizar);
+
+        tarefa = (Tarefas) i.getSerializableExtra("tarefa");
         usuario = (Usuarios) i.getSerializableExtra("Usuario");
-        //teste
-        btnArtigos = (Button) findViewById(R.id.btnArtigos);
+
+        txtMateria.setText("Materia: "+ tarefa.getMateria());
+        txtDefinicao.setText("Definição da tarefa: "+tarefa.getaFazer());
+        txtDiaEntrega.setText("Data da entrega: "+tarefa.getTempoEntrega());
+        txtDiaPrevisto.setText("Data Prevista: "+tarefa.getTempoPrevisto());
+
+
+
+
         btnArtigos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView txtTarefa = (TextView)findViewById(R.id.txtNomeTarefa);
+
                 String sTarefa=String.valueOf(txtTarefa.getText().toString());
                 String pesquisa = sTarefa.replace(" ", "+");
                 Uri uriUrl = Uri.parse("https://scholar.google.com.br/scholar?hl=pt-BR&as_sdt=0%2C5&q="+pesquisa+"&oq=");
                 Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
 
-                TextView txtDefinicao = (TextView)findViewById(R.id.txtDefinicao);
-                String sDefinicao=String.valueOf(txtDefinicao.getText().toString());
-                String var1 = sDefinicao.substring(21,sDefinicao.length());
-                String pesquisa2 = var1.replace(" ", "+");
-                Uri uriUrl2 = Uri.parse("https://scholar.google.com.br/scholar?hl=pt-BR&as_sdt=0%2C5&q="+pesquisa2+"&oq=");
-                Intent launchBrowser2 = new Intent(Intent.ACTION_VIEW, uriUrl2);
-                startActivity(launchBrowser2);
+//                String sDefinicao=String.valueOf(txtDefinicao.getText().toString());
+//                String var1 = sDefinicao.substring(21,sDefinicao.length());
+//                String pesquisa2 = var1.replace(" ", "+");
+//                Uri uriUrl2 = Uri.parse("https://scholar.google.com.br/scholar?hl=pt-BR&as_sdt=0%2C5&q="+pesquisa2+"&oq=");
+//                Intent launchBrowser2 = new Intent(Intent.ACTION_VIEW, uriUrl2);
+//                startActivity(launchBrowser2);
             }
-        });
+        }) ;
+
+
     }
 
 

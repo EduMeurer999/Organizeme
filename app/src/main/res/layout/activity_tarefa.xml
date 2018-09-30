@@ -23,43 +23,62 @@
                 android:layout_height="match_parent"
                 android:text="Nome da Tarefa"
                 android:textSize="24sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="20dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
 
-                <TextView
-                    android:id="@+id/txtMateria"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Materia:" />
+                    <TextView
+                        android:id="@+id/txtMateria"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Materia:" />
 
-                <TextView
-                    android:id="@+id/txtDefinicao"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Definição da tarefa:" />
+                    <TextView
+                        android:id="@+id/txtDefinicao"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Definição da tarefa:" />
 
-                <TextView
-                    android:id="@+id/txtTempoEntrega"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Dia da entrega" />
+                    <TextView
+                        android:id="@+id/txtTempoEntrega"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Dia da entrega" />
 
-                <TextView
-                    android:id="@+id/txtTempoPrevisto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Dia previsto" />
+                    <TextView
+                        android:id="@+id/txtTempoPrevisto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Dia previsto" />
 
-                <TextView
-                    android:id="@+id/txtFazer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="O que tem que fazer:" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btnFazerTarefa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Trabalhar na tarefa" />
+                </LinearLayout>
+
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -71,7 +90,7 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/btnEditar"
+                        android:id="@+id/btnEditarTarefa"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"

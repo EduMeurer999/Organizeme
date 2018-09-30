@@ -1,7 +1,5 @@
 package com.example.a20151inf0182.organizeme.Activity;
 
-//import android.content.Intent;
-//import android.os.Handler;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;

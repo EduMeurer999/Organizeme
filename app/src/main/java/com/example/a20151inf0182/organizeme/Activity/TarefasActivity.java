@@ -115,7 +115,7 @@ public class TarefasActivity extends AppCompatActivity {
                 }
                 View layoutTarefas = findViewById(R.id.lytTdsTarefas);
                 for (int x = 0; x< tempTarefas.size(); x++) {
-                    Tarefas tarefaTemp = new Tarefas();
+                    final Tarefas tarefaTemp;
                     tarefaTemp = tempTarefas.get(x);
 //
 //
@@ -123,24 +123,24 @@ public class TarefasActivity extends AppCompatActivity {
 //            TextView tvTempoRestante = (TextView) findViewById(R.id.txtTempoRes);
 //            TextView tvFazer = (TextView) findViewById(R.id.txtFazer);
 
-//            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-//            df.setLenient(false);
-//            Date d1 = null;
-//            try {
-//                d1 = df.parse(arrTemp.getTempoEntrega().toString());
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//                Toast.makeText(getApplicationContext(), "A data de entrega da tarefa é inválida", Toast.LENGTH_SHORT).show();
-//            }
-//            Date d2 = null;
-//            try {
-//                Date dataAtual = new Date();
-//                SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
-//                d2 = df.parse(formatador.format(dataAtual));
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
-//            long dt = (d2.getTime() - d1.getTime()) + 3600000;
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            df.setLenient(false);
+            Date d1 = null;
+            try {
+                d1 = df.parse(tarefaTemp.getTempoEntrega().toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+                Toast.makeText(getApplicationContext(), "A data de entrega da tarefa é inválida", Toast.LENGTH_SHORT).show();
+            }
+            Date d2 = null;
+            try {
+                Date dataAtual = new Date();
+                SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+                d2 = df.parse(formatador.format(dataAtual));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            long dt = (d2.getTime() - d1.getTime()) + 3600000;
 
 //            tvTarefa.setText("Tarefa: "+arrTemp.getNomeTarefa());
 //            tvFazer.setText("Definição da tarefa: "+arrTemp.getaFazer());
@@ -157,14 +157,17 @@ public class TarefasActivity extends AppCompatActivity {
                     layoutOutraTarefa.setOrientation(LinearLayout.VERTICAL);
                     layoutOutraTarefa.setPadding(0, 50, 0, 0);
                     // setar o id do layout onlick abrir a tela de tarefa
-                    // layoutOutraTarefa.setId("nomeDaTarefaAqui");
+                    int id = View.generateViewId();
+                    layoutOutraTarefa.setId(id);
+
                     layoutOutraTarefa.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
                     //cria um novo TextView nome da tarefa
                     TextView valueTV = new TextView(TarefasActivity.this);
                     valueTV.setText("Tarefa "+tarefaTemp.getNomeTarefa());
                     valueTV.setTextSize(Float.parseFloat("18"));
-                    //id pra tarefa (5 esta só para teste)
+                    //id pra tarefa (5 esta só para teste) faz aqui entao
+                    //faz por aqui
 //        valueTV.setId(5);
                     valueTV.setLayoutParams(new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.MATCH_PARENT,
@@ -201,13 +204,24 @@ public class TarefasActivity extends AppCompatActivity {
                             LinearLayout.LayoutParams.WRAP_CONTENT));
 
 
+
+
+
                     //add no layout das tarefas
                     ((LinearLayout) layoutTarefas).addView(layoutOutraTarefa);
                     ((LinearLayout) layoutOutraTarefa).addView(valueTV);
                     ((LinearLayout) layoutOutraTarefa).addView(barraProgresso);
                     ((LinearLayout) layoutOutraTarefa).addView(txtTempoRestante);
                     ((LinearLayout) layoutOutraTarefa).addView(txtFazer);
-
+                    findViewById(id).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent a = new Intent(TarefasActivity.this, tarefaActivity.class);
+                            a.putExtra("tarefa", tarefaTemp);
+                            a.putExtra("Usuario", usuario);
+                            startActivity(a);
+                        }
+                    });
                 }
 
             }
