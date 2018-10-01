@@ -105,27 +105,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txtTempoPrevisto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Dia que você acaba" />
-
-            <EditText
-                android:id="@+id/edtTempoPrevisto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="text" />
-
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/layoutIntegrante"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

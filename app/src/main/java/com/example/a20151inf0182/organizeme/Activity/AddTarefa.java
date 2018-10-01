@@ -36,8 +36,12 @@ import com.google.firebase.database.ValueEventListener;
 import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 
 public class AddTarefa extends AppCompatActivity {
@@ -65,7 +69,6 @@ public class AddTarefa extends AppCompatActivity {
         final EditText edtMateria = (EditText) findViewById(R.id.edtMateria);
         final EditText edtFazer = (EditText) findViewById(R.id.edtFazer);
         final EditText edtTempoEntrega = (EditText) findViewById(R.id.edtTempoEntrega);
-        final EditText edtTempoPrevisto = (EditText) findViewById(R.id.edtTempoPrevisto);
         final EditText edtPropFazer = (EditText) findViewById(R.id.edtTarefaProp);
         final Button btnCadastrarTarefa = (Button) findViewById(R.id.btnCadastrarTarfefa);
         tvIntegrantes = (TextView) findViewById(R.id.tvIntegrantes);
@@ -171,7 +174,6 @@ public class AddTarefa extends AppCompatActivity {
                 String fazer = edtFazer.getText().toString();
                 String nomeTarefa = edtNomeTarefa.getText().toString();
                 String dataEntrega = edtTempoEntrega.getText().toString();
-                String dataPrevista = edtTempoPrevisto.getText().toString();
                 String subTarefaProp = edtPropFazer.getText().toString();
                 String materia = edtMateria.getText().toString();
 
@@ -179,7 +181,6 @@ public class AddTarefa extends AppCompatActivity {
                 if (!fazer.equals("")
                         && !nomeTarefa.equals("")
                         && !dataEntrega.equals("")
-                        && !dataPrevista.equals("")
                         && !subTarefaProp.equals("")
                         && !materia.equals("")) {
                     String status = "Em andamento";
@@ -191,7 +192,12 @@ public class AddTarefa extends AppCompatActivity {
                     tarefa.setaFazer(fazer);
                     tarefa.setNomeTarefa(nomeTarefa);
                     tarefa.setTempoEntrega(dataEntrega);
-                    tarefa.setTempoPrevisto(dataPrevista);
+                    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                    Calendar a = Calendar.getInstance();
+                    Date data = new Date();
+                    a.setTime(data);
+                    Date data_atual = a.getTime();
+                    tarefa.setTempoPrevisto(format.format(data_atual));
                     tarefa.setSubTarefaProp(subTarefaProp);
                     tarefa.setMateria(materia);
                     tarefa.setIntegrantes(integrantes);
@@ -199,7 +205,7 @@ public class AddTarefa extends AppCompatActivity {
                     Database.child("Tarefas").child(keyPush).child("fazer").setValue(tarefa.getaFazer());
                     Database.child("Tarefas").child(keyPush).child("nome").setValue(tarefa.getNomeTarefa());
                     Database.child("Tarefas").child(keyPush).child("tempoEntrega").setValue(tarefa.getTempoEntrega());
-                    Database.child("Tarefas").child(keyPush).child("tempoPrevisto").setValue(tarefa.getTempoPrevisto());
+                    Database.child("Tarefas").child(keyPush).child("dataCriacao").setValue(tarefa.getTempoPrevisto());
                     Database.child("Tarefas").child(keyPush).child("SubTarefa Proprietario").setValue(tarefa.getSubTarefaProp());
                     Database.child("Tarefas").child(keyPush).child("materia").setValue(tarefa.getMateria());
                     Database.child("Tarefas").child(keyPush).child("proprietario").setValue(usuario.getEmail());

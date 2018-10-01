@@ -65,14 +65,14 @@ public class EditarTarefaActivity extends AppCompatActivity {
         final EditText edtMateria = (EditText) findViewById(R.id.edtMateria);
         final EditText edtFazer = (EditText) findViewById(R.id.edtFazer);
         final EditText edtTempoEntrega = (EditText) findViewById(R.id.edtTempoEntrega);
-        final EditText edtTempoPrevisto = (EditText) findViewById(R.id.edtTempoPrevisto);
+
         final Button btnEditar = (Button) findViewById(R.id.btnEditarTarefa);
 
         edtNomeTarefa.setText(tarefa.getNomeTarefa());
         edtMateria.setText(tarefa.getMateria());
         edtFazer.setText(tarefa.getaFazer());
         edtTempoEntrega.setText(tarefa.getTempoEntrega());
-        edtTempoPrevisto.setText(tarefa.getTempoPrevisto());
+
 
 
         final String finalIdIntegrante = idIntegrante;
@@ -86,7 +86,7 @@ public class EditarTarefaActivity extends AppCompatActivity {
                 String fazer = edtFazer.getText().toString();
                 String nomeTarefa = edtNomeTarefa.getText().toString();
                 String dataEntrega = edtTempoEntrega.getText().toString();
-                String dataPrevista = edtTempoPrevisto.getText().toString();
+
 
                 String materia = edtMateria.getText().toString();
 
@@ -94,7 +94,7 @@ public class EditarTarefaActivity extends AppCompatActivity {
                 tarefaBD.child("nome").setValue(nomeTarefa);
                 tarefaBD.child("fazer").setValue(fazer);
                 tarefaBD.child("tempoEntrega").setValue(dataEntrega);
-                tarefaBD.child("tempoPrevisto").setValue(dataPrevista);
+
                 tarefaBD.child("materia").setValue(materia);
                 if (finalIsIntegrante) {
                     String subTarefa = edtSubInt.getText().toString();
