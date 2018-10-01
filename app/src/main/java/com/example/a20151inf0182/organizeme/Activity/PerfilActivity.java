@@ -73,32 +73,81 @@ public class PerfilActivity extends AppCompatActivity {
         tvCurso.setText("Curso: "+usuario.getCurso());
         tvDataNasc.setText("Data Nascimento: "+ usuario.getDataNascimento());
         tvSerie.setText("Serie/Ano: "+usuario.getSerie());
+
+
+
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                LayoutInflater li = getLayoutInflater();
-//                View view = li.inflate(R.layout.editar_layout, null);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                LayoutInflater li = getLayoutInflater();
+                View view = li.inflate(R.layout.editar_dados, null);
+
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
                 builder.setCancelable(false);
                 builder.setTitle("Atualiza suas informações!");
-                builder.setView(R.layout.alert_dialog);
+                builder.setView(R.layout.editar_dados);
+                builder.setPositiveButton("Atualizar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        EditText emailAtualizar = (EditText) ((Dialog) dialog).findViewById(R.id.edtEmailAtulizar);
+                        EditText cursoAtualizar = (EditText) ((Dialog) dialog).findViewById(R.id.edtCursoAtualizar);
+                        EditText dataNascAtualizar = (EditText) ((Dialog) dialog).findViewById(R.id.edtDataNatualizar);
+                        EditText serieAtualizar = (EditText) ((Dialog) dialog).findViewById(R.id.edtSerieAtulizar);
+                        EditText nomeAtualizar = (EditText) ((Dialog) dialog).findViewById(R.id.edtNomeAtulizar);
+                        EditText senhaNova = (EditText) ((Dialog) dialog).findViewById(R.id.edtSenhaNova);
+                        EditText senhaAntiga = (EditText) ((Dialog) dialog).findViewById(R.id.edtSenhaAntiga);
 
-//                builder.setPositiveButton("Atualizar", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        final EditText emailAtualizar = (EditText) ((Dialog) dialog).findViewById(R.id.emailAtualizar);
-//                        final EditText cursoAtualizar = (EditText) ((Dialog) dialog).findViewById(R.id.edtCursoAtualizar);
-//                        final EditText dataNascAtualizar = (EditText) ((Dialog) dialog).findViewById(R.id.edtDataNatualizar);
-//                        final EditText serieAtualizar = (EditText) ((Dialog) dialog).findViewById(R.id.edtSerieAtualizar);
-//                        final EditText nomeAtualizar = (EditText) ((Dialog) dialog).findViewById(R.id.edtNomeAtualizar);
-//
-////                        String emailA = emailAtualizar.getText().toString();
-////                        String cursoA = emailAtualizar.getText().toString();
-////                        String emailA = emailAtualizar.getText().toString();
-//
-//                    }
-//                });
+                        String email = emailAtualizar.getText().toString();
+                        String curso = cursoAtualizar.getText().toString();
+                        String dataNasc = dataNascAtualizar.getText().toString();
+                        String serie = serieAtualizar.getText().toString();
+                        String nome = nomeAtualizar.getText().toString();
+                        String novaSenha = senhaNova.getText().toString();
+                        String antigaSenha = senhaAntiga.getText().toString();
+
+
+                        if (usuario.getSenha().equals(antigaSenha)) {
+                            if (!email.equals("") &&
+                                    !nome.equals("") &&
+                                    !curso.equals("") &&
+                                    !dataNasc.equals("") &&
+                                    !serie.equals("")
+                                    ) {
+
+                                mDatabase.child("Usuarios").child(usuario.getId()).child("nome").setValue(nome);
+                                mDatabase.child("Usuarios").child(usuario.getId()).child("email").setValue(email);
+                                mDatabase.child("Usuarios").child(usuario.getId()).child("curso").setValue(curso);
+                                mDatabase.child("Usuarios").child(usuario.getId()).child("dataNascimento").setValue(dataNasc);
+                                mDatabase.child("Usuarios").child(usuario.getId()).child("serie").setValue(serie);
+                                usuarioConectado.updateEmail(email);
+                                usuarioConectado.updatePassword(novaSenha);
+
+
+
+                            }
+                            else{
+                                Toast.makeText(PerfilActivity.this, "Há campos em branco", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                        else{
+                            Toast.makeText(PerfilActivity.this, "Sua senha antiga não é essa!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                final AlertDialog ad = builder.create();
+
+               ad.show();
+
+
             }
         });
 
