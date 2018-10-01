@@ -31,6 +31,7 @@ public class tarefaActivity extends AppCompatActivity {
 
     private Usuarios usuario;
     private FirebaseAuth mAuth;
+    private DatabaseReference Database;
     private Tarefas tarefa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,7 @@ public class tarefaActivity extends AppCompatActivity {
         final Button btnEditar = (Button) findViewById(R.id.btnEditarTarefa);
         final Button btnFinalizar = (Button) findViewById(R.id.btnFinalizar);
         final Button btnTrabTarefa = (Button) findViewById(R.id.btnFazerTarefa);
-
+        Database = ConfiguracaoFirebase.getDatabaseReference();
         tarefa = (Tarefas) i.getSerializableExtra("tarefa");
         usuario = (Usuarios) i.getSerializableExtra("Usuario");
 
@@ -54,8 +55,10 @@ public class tarefaActivity extends AppCompatActivity {
         txtMateria.setText("Materia: "+ tarefa.getMateria());
         txtDefinicao.setText("Definição da tarefa: "+tarefa.getaFazer());
         txtDiaEntrega.setText("Data da entrega: "+tarefa.getTempoEntrega());
-        txtDiaPrevisto.setText("Data Prevista: "+tarefa.getTempoPrevisto());
-
+        txtDiaPrevisto.setText("Data de criação: "+tarefa.getTempoPrevisto());
+        if(!tarefa.getStatus().equals("Em andamento")){
+            btnFinalizar.setVisibility(View.INVISIBLE);
+        }
 
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,13 +79,6 @@ public class tarefaActivity extends AppCompatActivity {
                 Uri uriUrl = Uri.parse("https://scholar.google.com.br/scholar?hl=pt-BR&as_sdt=0%2C5&q="+pesquisa+"&oq=");
                 Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
-
-//                String sDefinicao=String.valueOf(txtDefinicao.getText().toString());
-//                String var1 = sDefinicao.substring(21,sDefinicao.length());
-//                String pesquisa2 = var1.replace(" ", "+");
-//                Uri uriUrl2 = Uri.parse("https://scholar.google.com.br/scholar?hl=pt-BR&as_sdt=0%2C5&q="+pesquisa2+"&oq=");
-//                Intent launchBrowser2 = new Intent(Intent.ACTION_VIEW, uriUrl2);
-//                startActivity(launchBrowser2);
             }
         });
         btnTrabTarefa.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +88,16 @@ public class tarefaActivity extends AppCompatActivity {
 
             }
         });
-
+        btnFinalizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Database.child("Tarefas").child(tarefa.getIdTarefa()).child("status").setValue("finalizado");
+                Intent i = new Intent(tarefaActivity.this, TarefasActivity.class);
+                i.putExtra("Usuario", usuario);
+                startActivity(i);
+                finish();
+            }
+        });
 
     }
 
