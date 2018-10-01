@@ -29,8 +29,9 @@
         <activity android:name=".Activity.NotasActivity" />
         <activity android:name=".Activity.tarefaActivity" />
         <activity android:name=".Activity.TarefasActivity" />
-        <activity android:name=".Activity.AjudaActivity"></activity>
-        <activity android:name=".Activity.EditarTarefaActivity"></activity>
+        <activity android:name=".Activity.AjudaActivity" />
+        <activity android:name=".Activity.EditarTarefaActivity" />
+        <activity android:name=".Activity.cronometro_activity"></activity>
     </application>
 
 </manifest>

@@ -45,6 +45,7 @@ public class tarefaActivity extends AppCompatActivity {
         final Button btnArtigos = (Button) findViewById(R.id.btnArtigos);
         final Button btnEditar = (Button) findViewById(R.id.btnEditarTarefa);
         final Button btnFinalizar = (Button) findViewById(R.id.btnFinalizar);
+        final Button btnTrabTarefa = (Button) findViewById(R.id.btnFazerTarefa);
 
         tarefa = (Tarefas) i.getSerializableExtra("tarefa");
         usuario = (Usuarios) i.getSerializableExtra("Usuario");
@@ -82,7 +83,13 @@ public class tarefaActivity extends AppCompatActivity {
 //                Intent launchBrowser2 = new Intent(Intent.ACTION_VIEW, uriUrl2);
 //                startActivity(launchBrowser2);
             }
-        }) ;
+        });
+        btnTrabTarefa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(tarefaActivity.this, cronometro_activity.class));
+            }
+        });
 
 
     }
