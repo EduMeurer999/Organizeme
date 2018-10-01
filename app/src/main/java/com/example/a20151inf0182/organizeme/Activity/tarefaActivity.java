@@ -50,6 +50,7 @@ public class tarefaActivity extends AppCompatActivity {
         tarefa = (Tarefas) i.getSerializableExtra("tarefa");
         usuario = (Usuarios) i.getSerializableExtra("Usuario");
 
+        txtTarefa.setText(tarefa.getNomeTarefa());
         txtMateria.setText("Materia: "+ tarefa.getMateria());
         txtDefinicao.setText("Definição da tarefa: "+tarefa.getaFazer());
         txtDiaEntrega.setText("Data da entrega: "+tarefa.getTempoEntrega());
@@ -70,7 +71,7 @@ public class tarefaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String sTarefa=String.valueOf(txtTarefa.getText().toString());
+                String sTarefa=String.valueOf(txtMateria.getText().toString());
                 String pesquisa = sTarefa.replace(" ", "+");
                 Uri uriUrl = Uri.parse("https://scholar.google.com.br/scholar?hl=pt-BR&as_sdt=0%2C5&q="+pesquisa+"&oq=");
                 Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
@@ -88,6 +89,7 @@ public class tarefaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(tarefaActivity.this, cronometro_activity.class));
+
             }
         });
 

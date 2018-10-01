@@ -38,6 +38,9 @@ import org.w3c.dom.Text;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 
 public class AddTarefa extends AppCompatActivity {
@@ -191,6 +194,9 @@ public class AddTarefa extends AppCompatActivity {
                     tarefa.setaFazer(fazer);
                     tarefa.setNomeTarefa(nomeTarefa);
                     tarefa.setTempoEntrega(dataEntrega);
+//                    Date d = new Date();
+//                    Calendar c = new GregorianCalendar();
+//                    c.setTime(d.getTime());
                     tarefa.setTempoPrevisto(dataPrevista);
                     tarefa.setSubTarefaProp(subTarefaProp);
                     tarefa.setMateria(materia);
@@ -199,7 +205,7 @@ public class AddTarefa extends AppCompatActivity {
                     Database.child("Tarefas").child(keyPush).child("fazer").setValue(tarefa.getaFazer());
                     Database.child("Tarefas").child(keyPush).child("nome").setValue(tarefa.getNomeTarefa());
                     Database.child("Tarefas").child(keyPush).child("tempoEntrega").setValue(tarefa.getTempoEntrega());
-                    Database.child("Tarefas").child(keyPush).child("tempoPrevisto").setValue(tarefa.getTempoPrevisto());
+                    Database.child("Tarefas").child(keyPush).child("dataCriacao").setValue(tarefa.getTempoPrevisto());
                     Database.child("Tarefas").child(keyPush).child("SubTarefa Proprietario").setValue(tarefa.getSubTarefaProp());
                     Database.child("Tarefas").child(keyPush).child("materia").setValue(tarefa.getMateria());
                     Database.child("Tarefas").child(keyPush).child("proprietario").setValue(usuario.getEmail());
