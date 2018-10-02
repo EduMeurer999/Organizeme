@@ -2,6 +2,7 @@ package com.example.a20151inf0182.organizeme.Activity;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,14 +38,15 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser usuarioConectado;
     private DatabaseReference Database;
     private Button btnTeste;
+    private Usuarios usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getSupportActionBar().hide();
         Database = ConfiguracaoFirebase.getDatabaseReference();
         Auth = ConfiguracaoFirebase.getFirebaseAuth();
+        usuario = new Usuarios();
         usuarioConectado = Auth.getCurrentUser();
-
         super.onCreate(savedInstanceState);
         if (usuarioConectado != null) {
             Toast.makeText(getApplicationContext(), "Fazendo login", Toast.LENGTH_SHORT).show();
@@ -52,14 +54,10 @@ public class MainActivity extends AppCompatActivity {
         } else {
             setContentView(R.layout.activity_main);
 
-            final Usuarios usuario = new Usuarios();
 
             edtEmail = (EditText) findViewById(R.id.edtEmail);
             edtSenha = (EditText) findViewById(R.id.edtSenha);
             btnLogar = (Button) findViewById(R.id.btnLogar);
-
-
-
 
 
             btnLogar.setOnClickListener(new View.OnClickListener() {
@@ -88,10 +86,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void validarLogin(){
-        final Usuarios usuario = new Usuarios();
+    public void validarLogin() {
 
-        if(usuarioConectado == null) {
+
+        if (usuarioConectado == null) {
             Auth.signInWithEmailAndPassword(edtEmail.getText().toString(), edtSenha.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -128,8 +126,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
-        }
-        else{
+        } else {
             Database.child("Usuarios").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

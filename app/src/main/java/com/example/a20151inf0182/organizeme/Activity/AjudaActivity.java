@@ -33,7 +33,7 @@ public class AjudaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ajuda);
         Intent i = getIntent();
         usuario = (Usuarios) i.getSerializableExtra("Usuario");
-
+        mAuth = ConfiguracaoFirebase.getFirebaseAuth();
     }
 
     @Override

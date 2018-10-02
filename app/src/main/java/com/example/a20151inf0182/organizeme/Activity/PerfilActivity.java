@@ -68,98 +68,24 @@ public class PerfilActivity extends AppCompatActivity {
         usuario = (Usuarios) i.getSerializableExtra("Usuario");
 
 
-        tvNome.setText("Nome: "+usuario.getNome());
-        tvEmail.setText("Email: "+usuario.getEmail());
-        tvCurso.setText("Curso: "+usuario.getCurso());
-        tvDataNasc.setText("Data Nascimento: "+ usuario.getDataNascimento());
-        tvSerie.setText("Serie/Ano: "+usuario.getSerie());
+        tvNome.setText("Nome: " + usuario.getNome());
+        tvEmail.setText("Email: " + usuario.getEmail());
+        tvCurso.setText("Curso: " + usuario.getCurso());
+        tvDataNasc.setText("Data Nascimento: " + usuario.getDataNascimento());
+        tvSerie.setText("Serie/Ano: " + usuario.getSerie());
 
 
-
-        btnEditar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                LayoutInflater li = getLayoutInflater();
-                View view = li.inflate(R.layout.editar_dados, null);
-
-                final AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-                builder.setCancelable(false);
-                builder.setTitle("Atualiza suas informações!");
-                builder.setView(R.layout.editar_dados);
-                builder.setPositiveButton("Atualizar", new DialogInterface.OnClickListener() {
+        btnEditar.setOnClickListener(
+                new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        EditText emailAtualizar = (EditText) ((Dialog) dialog).findViewById(R.id.edtEmailAtulizar);
-                        EditText cursoAtualizar = (EditText) ((Dialog) dialog).findViewById(R.id.edtCursoAtualizar);
-                        EditText dataNascAtualizar = (EditText) ((Dialog) dialog).findViewById(R.id.edtDataNatualizar);
-                        EditText serieAtualizar = (EditText) ((Dialog) dialog).findViewById(R.id.edtSerieAtulizar);
-                        EditText nomeAtualizar = (EditText) ((Dialog) dialog).findViewById(R.id.edtNomeAtulizar);
-                        EditText senhaNova = (EditText) ((Dialog) dialog).findViewById(R.id.edtSenhaNova);
-                        EditText senhaAntiga = (EditText) ((Dialog) dialog).findViewById(R.id.edtSenhaAntiga);
+                    public void onClick(View v) {
+                        Intent a = new Intent(PerfilActivity.this, AtualizarDados.class);
+                        a.putExtra("usuario", usuario);
+                        startActivity(a);
 
-                        String email = emailAtualizar.getText().toString();
-                        String curso = cursoAtualizar.getText().toString();
-                        String dataNasc = dataNascAtualizar.getText().toString();
-                        String serie = serieAtualizar.getText().toString();
-                        String nome = nomeAtualizar.getText().toString();
-                        String novaSenha = senhaNova.getText().toString();
-                        String antigaSenha = senhaAntiga.getText().toString();
-
-
-                        if (usuario.getSenha().equals(antigaSenha)) {
-                            if (!email.equals("") &&
-                                    !nome.equals("") &&
-                                    !curso.equals("") &&
-                                    !dataNasc.equals("") &&
-                                    !serie.equals("")
-                                    ) {
-
-                                mDatabase.child("Usuarios").child(usuario.getId()).child("nome").setValue(nome);
-                                mDatabase.child("Usuarios").child(usuario.getId()).child("email").setValue(email);
-                                mDatabase.child("Usuarios").child(usuario.getId()).child("curso").setValue(curso);
-                                mDatabase.child("Usuarios").child(usuario.getId()).child("dataNascimento").setValue(dataNasc);
-                                mDatabase.child("Usuarios").child(usuario.getId()).child("serie").setValue(serie);
-                                usuarioConectado.updateEmail(email);
-                                usuarioConectado.updatePassword(novaSenha);
-
-
-
-                            }
-                            else{
-                                Toast.makeText(PerfilActivity.this, "Há campos em branco", Toast.LENGTH_SHORT).show();
-                            }
-
-                        }
-                        else{
-                            Toast.makeText(PerfilActivity.this, "Sua senha antiga não é essa!", Toast.LENGTH_SHORT).show();
-                        }
                     }
-                });
-                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-                final AlertDialog ad = builder.create();
-
-               ad.show();
-
-
-            }
-        });
-
-//        Button btnLogout = (Button) findViewById(R.id.btnLogout);
-//        btnLogout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mAuth.signOut();
-//                startActivity(new Intent(PerfilActivity.this, MainActivity.class));
-//            }
-//        });
-
+                }
+        );
 
 
     }
@@ -173,9 +99,9 @@ public class PerfilActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.opcPerfil:
-                Intent i  = new Intent(this, PerfilActivity.class);
+                Intent i = new Intent(this, PerfilActivity.class);
                 i.putExtra("Usuario", usuario);
                 startActivity(i);
                 finish();
@@ -212,7 +138,6 @@ public class PerfilActivity extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
-
 
 
     }

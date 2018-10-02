@@ -32,6 +32,7 @@
         <activity android:name=".Activity.AjudaActivity" />
         <activity android:name=".Activity.EditarTarefaActivity" />
         <activity android:name=".Activity.cronometro_activity"></activity>
+        <activity android:name=".Activity.AtualizarDados"></activity>
     </application>
 
 </manifest>

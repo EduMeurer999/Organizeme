@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -40,6 +42,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -69,6 +72,7 @@ public class TarefasActivity extends AppCompatActivity {
         mDatabase = ConfiguracaoFirebase.getDatabaseReference();
 
         mDatabase.child("Tarefas").addListenerForSingleValueEvent(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 final ArrayList<Tarefas> tempTarefas = new ArrayList<>();
@@ -201,6 +205,26 @@ public class TarefasActivity extends AppCompatActivity {
                         ProgressBar barraProgresso = new ProgressBar(TarefasActivity.this, null, R.style.Widget_AppCompat_ProgressBar_Horizontal);
                         //id aqui
                         //barraProgresso.setId("");
+
+//                        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+//                        Date dataMaxima = null;
+//                        Date dataAtual = null;
+//                        Long dataMa = null;
+//                        Long dataA = null ;
+//                        try {
+//                            dataAtual = new Date(System.currentTimeMillis());
+//                            dataA = dataAtual.getTime();
+//                            dataMaxima =  formato.parse(tarefaTemp.getTempoEntrega());
+//                            dataMa = dataMaxima.getTime();
+//
+//                        } catch (ParseException e) {
+//                            e.printStackTrace();
+//                        }
+
+
+
+
+
                         barraProgresso.setProgress(50);
                         barraProgresso.setMax(100);
                         barraProgresso.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
